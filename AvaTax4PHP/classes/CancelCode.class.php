@@ -48,7 +48,6 @@ class CancelCode extends Enum
      * (was <b>Saved</b> or <b>Posted</b>) the document will be deleted within AvaTax.
 	 */
     public static $DocVoided			= 'DocVoided';
-    public static $AdjustmentCancelled	= 'AdjustmentCancelled';
 
     
 	public static function Values()
@@ -57,8 +56,7 @@ class CancelCode extends Enum
 			CancelCode::$Unspecified,
 			CancelCode::$PostFailed,
 			CancelCode::$DocDeleted,
-			CancelCode::$DocVoided,
-			CancelCode::$AdjustmentCancelled
+			CancelCode::$DocVoided
 		);
 	}
 	

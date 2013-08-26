@@ -22,8 +22,13 @@
 
 class CancelTaxRequest 
 {
-    private $CancelCode;   //Unspecified or PostFailed or DocDeleted or DocVoided or AdjustmentCancelled
-
+    public $CancelCode;   //Unspecified or PostFailed or DocDeleted or DocVoided or AdjustmentCancelled
+	public $DocCode;
+	public $DocType;
+	public $CompanyCode;
+	public $DocId;
+	
+	
 	public function __construct()
 	{
 		$this->DocType = DocumentType::$SalesInvoice;  // this is right Document
@@ -39,8 +44,10 @@ class CancelTaxRequest
      */
 
     public function getCancelCode() { return $this->CancelCode; }
-	
-	
+	public function getDocCode() { return $this->DocCode; }
+	public function getDocType() { return $this->DocType; }
+	public function getCompanyCode() { return $this->CompanyCode; }
+	public function getDocId() { return $this->DocId; }
     /**
      *   A code indicating the reason the document is getting canceled.
      *
@@ -49,7 +56,10 @@ class CancelTaxRequest
      */
 
     public function setCancelCode($value) { CancelCode::Validate($value); $this->CancelCode = $value; return $this; }
-	
+	public function setDocCode($value) { $this->DocCode = $value; }
+	public function setDocType($value) { $this->DocType = $value; }
+	public function setCompanyCode($value) { $this->CompanyCode = $value; }
+	public function setDocId($value) { $this->DocId = $value; }
 }
 
 

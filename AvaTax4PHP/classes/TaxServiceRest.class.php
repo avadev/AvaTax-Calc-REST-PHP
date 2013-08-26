@@ -61,7 +61,7 @@ class TaxServiceRest
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $cancelTaxRequest); //may need to be $cancelTaxRequest->toJson() or ->toArray()
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($cancelTaxRequest)); 
         $curl_response = curl_exec($curl);
         curl_close($curl);
         
@@ -78,7 +78,7 @@ class TaxServiceRest
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest)); //may need to be $cancelTaxRequest->toJson() or ->toArray()
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest)); 
         $curl_response = curl_exec($curl);
         curl_close($curl);
         

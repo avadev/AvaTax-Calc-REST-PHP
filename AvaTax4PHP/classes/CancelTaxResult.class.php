@@ -18,7 +18,7 @@ class CancelTaxResult // extends BaseResult
     
 
 // BaseResult innards - workaround a bug in SoapClient
-
+	private $DocId;
 /**
  * @var string
  */
@@ -31,7 +31,31 @@ class CancelTaxResult // extends BaseResult
  * @var array of Message.
  */
     private $Messages = array();
+    
+    
+    public function __constructor($docId, $transactionId, $resultCode, $messages)
+    {
+    	$this->DocId = $docId;
+    	$this->TransactionId = $transactionId;
+    	$this->ResultCode = $resultCode;
+    	$this->Messages = $messages;
+    }
+    
+    public function parseResult($jsonString)
+    {
+		$object = json_decode($jsonString);
+		$messages = array();	
+		if(property_exists($object, "Messages"))
+		{
+			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
+		}		
+		return new self($object->DocId, $object->TransactionId, $object->ResultCode , $messages );	    
+    
+    
+    }
+    
 
+    public function getDocId() { return $this->DocId; }
 /**
  * Accessor
  * @return string
