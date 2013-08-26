@@ -102,7 +102,7 @@ class ValidateResult extends BaseResult
  * @return array
  */
     public function getMessages() { 
-    return EnsureIsArray($this->Messages); }
+    return $this->Messages; }
     
     //@author:swetal
     

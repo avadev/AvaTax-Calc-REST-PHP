@@ -82,7 +82,7 @@ class EstimateTaxResult extends BaseResult
  * @return array
  */
     public function getMessages() { 
-    return EnsureIsArray($this->Messages); }
+    $this->Messages; }
     
     //@author:swetal
     

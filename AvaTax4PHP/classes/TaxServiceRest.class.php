@@ -72,6 +72,7 @@ class TaxServiceRest
     {
     	
 		$url = $this->config['url']."/1.0/tax/get";
+		
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
@@ -80,6 +81,7 @@ class TaxServiceRest
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest)); 
         $curl_response = curl_exec($curl);
+        
         curl_close($curl);
         
         return GetTaxResult::parseResult($curl_response);

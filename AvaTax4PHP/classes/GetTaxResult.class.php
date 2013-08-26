@@ -33,6 +33,8 @@ class GetTaxResult // extends BaseResult
 	public function __construct( $resultCode, $messages, $docCode, $docDate, $timestamp, $totalAmount, $totalDiscount, $totalExemption, $totalTaxable, $totalTax, $totalTaxCalculated, 
 			$taxDate, $taxLines, $taxSummary, $taxAddresses)
 	{
+		$this->ResultCode = $resultCode;
+		$this->Messages = $messages;
 		$this->DocCode = $docCode ;	
 		$this->DocDate = $docDate ;			 	
 		$this->Timestamp = $timestamp ;		
@@ -153,7 +155,7 @@ class GetTaxResult // extends BaseResult
 	* Accessor
 	* @return array
 	*/
-    public function getMessages() { return EnsureIsArray($this->Messages->Message); }
+    public function getMessages() { return $this->Messages; }
     
     
 
