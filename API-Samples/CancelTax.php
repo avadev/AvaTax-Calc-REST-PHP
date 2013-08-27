@@ -29,7 +29,7 @@ $client = new TaxServiceRest(
     $line1->setLineNo("01");                            
     $line1->setItemCode("SKU123");                  
     $line1->setQty(3);                          
-    $line1->setAmount(500);                   /
+    $line1->setAmount(500);                   
 	$line1->setOriginCode("01");
 	$line1->setDestinationCode("01");
     $request->setLines(array($line1));              
