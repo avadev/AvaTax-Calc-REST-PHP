@@ -12,10 +12,10 @@
  */
 class TaxOverrideType
 {
-    public static $None = "None"; //No tax override
-    public static $TaxAmount = "TaxAmount"; //Override the tax amount to be calculated
-    public static $Exemption = "Exemption"; //Override the presence of an exemption certificate to make the transaction taxable.
-    public static $TaxDate = "TaxDate";		//Override the tax date used to pull rate and boundaries for calculation. 
+    public static $None = "None";
+    public static $TaxAmount = "TaxAmount";
+    public static $Exemption = "Exemption";
+    public static $TaxDate = "TaxDate";
     
 }
 

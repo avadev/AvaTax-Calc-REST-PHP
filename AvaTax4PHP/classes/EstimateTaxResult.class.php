@@ -8,7 +8,8 @@
 class EstimateTaxResult extends BaseResult
 {
 /**
- * Returns composite rate and total tax for location, with an array of jurisdictional details.
+ * Array of matching {@link ValidAddress}'s.
+ * @var array
  */
     private $Rate;
     private $Tax;
@@ -25,7 +26,7 @@ class EstimateTaxResult extends BaseResult
 	}
 	
 	
-    //Helper function to decode result objects from Json responses to specific objects.	
+	
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);

@@ -48,9 +48,6 @@ class TaxDetail
 				$this->Country = $Country;
 				$this->Region = $Region; 	
     }
-    
-    
-    //Helper function to decode result objects from Json responses to specific objects.    
     public function parseTaxDetails($jsonString)
     {
     	$object = json_decode($jsonString);

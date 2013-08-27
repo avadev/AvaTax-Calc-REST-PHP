@@ -4,14 +4,14 @@
  */
  
  /**
- * Contains address data; Can be passed to {@link AddressServiceRest#validate};
+ * Contains address data; Can be passed to {@link AddressServiceSoap#validate};
  * Also part of the {@link GetTaxRequest}
  * result returned from the {@link TaxServiceSoap#getTax} tax calculation service;
  * No behavior - basically a glorified struct.
  *
  * <b>Example:</b>
  * <pre>
- *  $port = new AddressServiceRest($url, $account, $license);
+ *  $port = new AddressServiceSoap();
  *
  *  $address = new Address();
  *  $address->setLine1("900 Winslow Way");
@@ -43,6 +43,24 @@ class Address
     public $TaxRegionId;
     public $Latitude;
     public $Longitude;
+
+    /**
+     * Construct a new Address.
+     *
+     * Constructs a new instance of Address. 
+     * <pre>
+     * $address = new Address();
+     * </pre>
+     *
+     * @param string $line1
+     * @param string $line2
+     * @param string $line3
+     * @param string $city
+     * @param string $region
+     * @param string $postalCode
+     * @param string $country
+     * @param integer $taxRegionId
+     */
 
     public function __construct($addressCode=null, $line1=null,$line2=null, $line3=null,$city=null,$region=null,$postalCode=null, $country='US', $taxRegionId=null, $latitude=null, $longitude=null)
     {
@@ -77,28 +95,136 @@ class Address
     	
     }
 
+	/**
+	 * Programmatically determined value used internally by the adapter.
+	 *
+	 * @param string $value
+	 * 
+	 */
     public function setLatitude($value) { $this->Latitude = $value; }
     public function setLongitude($value) { $this->Longitude = $value; }    	 
     public function setAddressCode($value) { $this->AddressCode = $value; }
-    public function setLine1($value) { $this->Line1 = $value; }
-    public function setLine2($value) { $this->Line2 = $value; }
-    public function setLine3($value) { $this->Line3 = $value;  }
-    public function setCity($value) { $this->City = $value; }
-    public function setRegion($value) { $this->Region = $value; }
-    public function setPostalCode($value) { $this->PostalCode = $value;  }
-    public function setCountry($value) { $this->Country = $value; }
-    public function setTaxRegionId($value) { $this->TaxRegionId = $value;  }
     
+    /**
+     * Address line 1 
+     *
+     * @param string $value
+     */
+    public function setLine1($value) { $this->Line1 = $value; }
+    
+    /**
+     * Address line 2
+     *
+     * @param string $value
+     */
+    public function setLine2($value) { $this->Line2 = $value; }
+    
+    /**
+     * Address line 3 
+     *
+     * @param string $value
+     */
+    public function setLine3($value) { $this->Line3 = $value;  }
+    
+    /**
+     * City name
+     *
+     * @param string $value
+     */
+    public function setCity($value) { $this->City = $value; }
+    
+    /**
+     * State or province name or abbreviation
+     *
+     * @param string $value
+     */
+    public function setRegion($value) { $this->Region = $value; }
+    
+    /**
+     * Postal or ZIP code
+     *
+     * @param string $value
+     */
+    public function setPostalCode($value) { $this->PostalCode = $value;  }
+    
+    /**
+     * Country name
+     *
+     * @param string $value
+     */
+    public function setCountry($value) { $this->Country = $value; }
+
+
+	/**
+	 * TaxRegionId provides the ability to override the tax region assignment for an address. 
+	 *
+	 * @param string $value
+	 */
+    public function setTaxRegionId($value) { $this->TaxRegionId = $value;  }
+
+ 	/**
+ 	 * Programmatically determined value used internally by the adapter.
+ 	 *
+ 	 * @return string $value
+ 	 */
     public function getLongitude() { return $this->Longitude; }
     public function getLatitude() { return $this->Latitude; }
     public function getAddressCode() { return $this->AddressCode; }
+    
+    /**
+     * Address line 1 
+     *
+     * @return string $value
+     */
     public function getLine1() { return $this->Line1; }
+    
+   /**
+     * Address line 2 
+     *
+     * @return string $value
+     */
     public function getLine2() { return $this->Line2; }
+    
+    /**
+     * Address line 3 
+     *
+     * @return string $value
+     */
     public function getLine3() { return $this->Line3; }
+    
+    /**
+     * City name 
+     *
+     * @return string $value
+     */
     public function getCity() { return $this->City; }
+    
+    /**
+     * State or province name or abbreviation
+     *
+     * @return string $value
+     */
     public function getRegion() { return $this->Region; }
+    
+    /**
+     * Postal or ZIP code 
+     *
+     * @return string $value
+     */
     public function getPostalCode() { return $this->PostalCode; }
+    
+    /**
+     * Country name
+     *
+     * @return string $value
+     */
     public function getCountry() { return $this->AddressCode; }
+    
+    /**
+     * TaxRegionId provides the ability to override the tax region assignment for an address. 
+     *
+     * @return string $value
+     */
     public function getTaxRegionId() { return $this->TaxRegionId; }
 
 

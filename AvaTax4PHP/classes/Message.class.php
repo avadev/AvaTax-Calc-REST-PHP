@@ -6,7 +6,6 @@
 /**
  * Message class used in results and exceptions.
  * Contains status detail about call results.
- * Note that the REST API does not make use of all of these properties for all methods.
  *
  * @package   Address
  * @author    Avalara
@@ -33,8 +32,6 @@ class Message
 		$this->Source = $source;
 		$this->Name = $name;
     }
-    
-    //Helper function to decode result objects from Json responses to specific objects.
     public function parseMessages($jsonString)
     {
 		$object = json_decode($jsonString);

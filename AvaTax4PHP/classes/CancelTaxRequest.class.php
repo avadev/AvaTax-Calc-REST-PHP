@@ -22,25 +22,38 @@
 
 class CancelTaxRequest 
 {
-    public $CancelCode;   //CancelCode::$Unspecified or CancelCode::$PostFailed or CancelCode::$DocDeleted or CancelCode::$DocVoided
-	public $DocCode;	//string
-	public $DocType;	//DocumentType::$SalesInvoice or DocumentType::$ReturnInvoice or DocumentType::$PurchaseInvoice
-	public $CompanyCode; //string
-	public $DocId;	//integer, deprecated.
+    public $CancelCode;   //Unspecified or PostFailed or DocDeleted or DocVoided or AdjustmentCancelled
+	public $DocCode;
+	public $DocType;
+	public $CompanyCode;
+	public $DocId;
 	
 	
 	public function __construct()
 	{
-		$this->DocType = DocumentType::$SalesInvoice;  
+		$this->DocType = DocumentType::$SalesInvoice;  // this is right Document
 		$this->CancelCode = CancelCode::$Unspecified;
 	}
 
+
+    /**
+     *   A code indicating the reason the document is getting canceled.
+     *
+     * @return string
+     * @see CancelCode
+     */
 
     public function getCancelCode() { return $this->CancelCode; }
 	public function getDocCode() { return $this->DocCode; }
 	public function getDocType() { return $this->DocType; }
 	public function getCompanyCode() { return $this->CompanyCode; }
 	public function getDocId() { return $this->DocId; }
+    /**
+     *   A code indicating the reason the document is getting canceled.
+     *
+     * @var string
+     * @see CancelCode
+     */
 
     public function setCancelCode($value) { CancelCode::Validate($value); $this->CancelCode = $value; return $this; }
 	public function setDocCode($value) { $this->DocCode = $value; }

@@ -12,8 +12,8 @@ $client = new AddressServiceRest(
 try
 {
 	$address = new Address();
-	$address->setLine1("General Delivery");		//R: An address line is required for validation.
-	$address->setCity("Bainbridge Island");		//R: Two of the three: city, region, postal code are required.
+	$address->setLine1("General Delivery");
+	$address->setCity("Bainbridge Island");
 	$address->setRegion("WA");
 	$address->setPostalCode("98110");
 
@@ -58,11 +58,19 @@ try
 }
 
 
-catch(Exception $exception)
+catch(SoapFault $exception)
 {
 	$msg = "Exception: ";
 	if($exception)
 		$msg .= $exception->faultstring;
-}   
+
+// If you desire to retrieve SOAP IN / OUT XML
+//  - Follow directions below
+//  - if not, leave as is
+//    }   //UN-comment this line to return SOAP XML
+        echo $msg . "\n";
+        echo $client->__getLastRequest() . "\n";
+        echo $client->__getLastResponse() . "\n";
+}   //Comment this line to return SOAP XML
 
 ?>

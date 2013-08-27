@@ -5,7 +5,7 @@
  
 /**
  * Specifies the level of tax detail to return to the client application following a tax calculation.
- * @see GetTaxRequest
+ * @see GetTaxRequest, GetTaxHistoryRequest
  *
  * @author    Avalara
  * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
@@ -16,7 +16,7 @@
 class DetailLevel extends Enum
 {
    /**
-     * Tax jurisdiction breakout as an array of TaxDetail at the document level.
+     * Reserved for future use.
      */
 	public static $Summary		= 'Summary';
 	

@@ -2,22 +2,14 @@
 /**
  * EstimateTaxRequest.class.php
  */
-/**
- * Data to pass to {@link TaxServiceSoap#estimateTax}.
- *
- * @Calculates a composite tax for a given latitude/longitude and sale amount. Currently supported for US only.
- * 
- * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
- * @package   Tax
- */
+
 
 
 class EstimateTaxRequest
 {
-    private $Latitude; //decimal
-    private $Longitude; //decimal
-    private $SaleAmount; //decimal
+    private $Latitude;
+    private $Longitude;
+    private $SaleAmount;
     
     public function __construct($latitude, $longitude, $saleAmt)
     {

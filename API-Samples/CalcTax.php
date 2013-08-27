@@ -35,37 +35,38 @@ $request = new GetTaxRequest();
 
 	$addresses = array();
 //Add Origin Address
-    $origin = new Address();                    // R: New instance of an address, we will use this for the origin
-    $origin->setLine1("PO Box 123");            // O: It is not required to pass a valid street address, but it will provide for a better tax calculation.
-    $origin->setCity("Seattle");                // R: City
-    $origin->setRegion("WA");              		// R: State or Province
-    $origin->setPostalCode("98101");      		// R: String (Expects to be NNNNN or NNNNN-NNNN or LLN-LLN)
-    $origin->setAddressCode("01");            	// R: Allows us to use the address on our Lines
-	$addresses[] = $origin;						// 		Adds the address to our array of addresses on the request.
+    $origin = new Address();                      // R: New instance of an origin address
+    $origin->setLine1("PO Box 123");              // O: It is not required to pass a valid street address however the 
+    $origin->setCity("Seattle");                  // R: City
+    $origin->setRegion("WA");              // R: State or Province
+    $origin->setPostalCode("98101");      // R: String (Expects to be NNNNN or NNNNN-NNNN or LLN-LLN)
+    $origin->setAddressCode("01");            // O: String Country, Country Code, etc.
+	$addresses[] = $origin;
 
 // Add Destination Address
-    $destination = new Address();                 // R: New instance of an address, we will use this as the destination
-    $destination->setLine1("General Delivery");         
-    $destination->setRegion("CA");         
-    $destination->setPostalCode("90210");
-    $destination->setAddressCode("02");       
-	$addresses[] = $destination;				// 		Adds the address to our array of addresses on the request.
+    $destination = new Address();                 // R: New instance of an destination address
+    $destination->setLine1("General Delivery");         // O: It is not required to pass a valid street address however the 
+    $destination->setRegion("CA");         // R: State or Province
+    $destination->setPostalCode("90210"); // R: String (Expects to be NNNNN or NNNNN-NNNN or LLN-LLN)
+    $destination->setAddressCode("02");       // O: String Country, Country Code, etc.
+	$addresses[] = $destination;
 	
 	$request->setAddresses($addresses);
 //
 // Line level processing
     
-
+    $lines = array();                                     // array of lines for the invoice
+    //$i = 0;                                            // sets counter to 0 (multiple lines)
     $line1 = new Line();                                // New instance of a line  
     $line1->setLineNo("01");                            // R: string - line Number of invoice - must be unique.
-    $line1->setItemCode("SKU123");                   	// R: string - SKU or short name of Item
-    $line1->setDescription("Blue widget");              // O: string - Longer description of Item - R: for SST
-    $line1->setTaxCode("PC040100");               		// O: string - Tax Code associated with Item
-    $line1->setQty(3);                          		// R: decimal - The number of items 
-    $line1->setAmount(500);                   			// R: decimal - the "NET" amount of items  (extended amount)
-    $line1->setDiscounted(false);                		// O: boolean - Set to true if line item is to discounted - see Discount
-	$line1->setOriginCode("01");						// R: AddressCode set on the desired origin address above
-	$line1->setDestinationCode("02");					// R: AddressCode set on the desired destination address above
+    $line1->setItemCode("SKU123");                   // R: string - SKU or short name of Item
+    $line1->setDescription("Blue widget");               // O: string - Longer description of Item - R: for SST
+    $line1->setTaxCode("PC040100");               // O: string - Tax Code associated with Item
+    $line1->setQty(3);                          // R: decimal - The number of items 
+    $line1->setAmount(500);                   // R: decimal - the "NET" amount of items 
+    $line1->setDiscounted(false);                //O: boolean - Set to true if line item is to discounted - see Discount
+	$line1->setOriginCode("01");
+	$line1->setDestinationCode("02");
 
     $request->setLines(array($line1));             // sets line items to $lineX array    
 
@@ -114,8 +115,16 @@ $request = new GetTaxRequest();
     } catch (SoapFault $exception) {
         $msg = "Exception: ";
         if ($exception)
-            $msg .= $exception->faultstring;       
-        echo $msg . "\n";
+            $msg .= $exception->faultstring;
 
+// If you desire to retrieve SOAP IN / OUT XML
+//  - Follow directions below
+//  - if not, leave as is
+       
+        echo $msg . "\n";
+//    }   //UN-comment this line to return SOAP XML
+    echo $client->__getLastRequest() . "\n";
+    echo $client->__getLastResponse() . "\n";
+//}   //Comment this line to return SOAP XML
 }
 ?>

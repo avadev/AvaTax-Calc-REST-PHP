@@ -9,7 +9,7 @@ $client = new TaxServiceRest(
 	
 try
 {
-	$result = $client->ping(""); //Note: any parameter content passed to the Ping method will be ignored.
+	$result = $client->ping("");
 	echo 'Ping ResultCode is: '. $result->getResultCode()."\n";
 	if($result->getResultCode() != SeverityLevel::$Success)	// call failed
 	{	
@@ -20,13 +20,15 @@ try
 
 	} 
 }
-catch(Exception $exception)
+catch(SoapFault $exception)
 {
 	$msg = "Exception: ";
 	if($exception)
 		$msg .= $exception->faultstring;
 
 	echo $msg."\n";
+	echo $client->__getLastRequest()."\n";
+	echo $client->__getLastResponse()."\n";
 }
 
 ?>

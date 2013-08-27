@@ -28,7 +28,7 @@ class GetTaxResult // extends BaseResult
 	private $TaxDate;		//date 		
  	private $TaxLines;	//ArrayOfTaxLine
 	private $TaxSummary;		//ArrayOfTaxDetail	
-	private $TaxAddresses;		//ArrayOfAddress
+	private $TaxAddresses;
 	
 	public function __construct( $resultCode, $messages, $docCode, $docDate, $timestamp, $totalAmount, $totalDiscount, $totalExemption, $totalTaxable, $totalTax, $totalTaxCalculated, 
 			$taxDate, $taxLines, $taxSummary, $taxAddresses)
@@ -50,8 +50,7 @@ class GetTaxResult // extends BaseResult
 		$this->TaxAddresses = $taxAddresses ;
 	
 	}
-
-    //Helper function to decode result objects from Json responses to specific objects.	
+	
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);
@@ -111,7 +110,6 @@ class GetTaxResult // extends BaseResult
 	public function setTaxAddresses($value) {  $this->TaxAddresses= $value; }
 	
 
-	//Allows for direct reference to and lookup of lines by line number.
 	public function getTaxLine($lineNo)
 	{
 		if($this->getTaxLines() != null)

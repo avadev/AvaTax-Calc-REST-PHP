@@ -4,7 +4,7 @@
  */
  
 /**
- * Interface for the Avalara Address Web Service. 
+ * Proxy interface for the Avalara Address Web Service. 
  *
  * AddressServiceRest reads its configuration values from parameters in the constructor
  *
@@ -24,13 +24,15 @@ class AddressServiceRest
 {
     static protected $classmap = array(
         							'Validate' => 'Validate',
+                                    'BaseRequest' => 'BaseRequest',
                                     'ValidateRequest' => 'ValidateRequest',
-                                    'Address' => 'Address',
+                                    'BaseAddress' => 'BaseAddress',
                                     'ValidAddress' => 'ValidAddress',                                    
                                     'ValidateResult' => 'ValidateResult',                                    
                                     'BaseResult' => 'BaseResult',
                                     'SeverityLevel' => 'SeverityLevel',
-                                    'Message' => 'Message');
+                                    'Message' => 'Message',
+                                    'Profile' => 'Profile',);
         
     protected $config = array();
 
@@ -42,9 +44,7 @@ class AddressServiceRest
             'license' => $license);   
     		                            
     }    
-    
-    
-    //Validates/normalizes a single provided address. Will either return a single, non-ambiguous validated address match or an error.	
+    	
 	 public function validate($validateRequest)
     {
 		
