@@ -14,7 +14,7 @@ $client = new TaxServiceRest(
     $dateTime = new DateTime();                                  
     $request->setCompanyCode("SDK");                    
     $request->setDocType(DocumentType::$SalesInvoice);    //This will need to be an invoice type to record a document for us to void.                       
-    $request->setDocCode("INV123123" . date_format($dateTime, "Y-m-d"));                         
+    $request->setDocCode("INV123123" . date_format($dateTime, "Y-m-d H:i:s"));                         
     $request->setDocDate(date_format($dateTime, "Y-m-d"));  
     $request->setCustomerCode("CUST123123");             
 
