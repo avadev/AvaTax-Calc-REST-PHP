@@ -37,6 +37,8 @@ class ValidateResult extends BaseResult
  * @var array
  */
     private $ValidAddress;
+    private $ResultCode = 'Success';
+    private $Messages = array();
     
 	public function __construct($resultCode , $validaddress , $messages)
 	{
@@ -46,7 +48,7 @@ class ValidateResult extends BaseResult
 	}
 	
 	
-	
+    //Helper function to decode result objects from Json responses to specific objects.		
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);
@@ -64,52 +66,10 @@ class ValidateResult extends BaseResult
 		return new self( $object->ResultCode , $address , $messages );	
 	}
 
-/**
- * Method returning array of matching {@link ValidAddress}'s.
- * @return array
- */
-    public function getValidAddress() { return $this->ValidAddress; }
-	
-	
-	
-	
-	
-	/**
- * @var string
- */
-    //private $TransactionId;
-/**
- * @var string must be one of the values defined in {@link SeverityLevel}.
- */
-    private $ResultCode = 'Success';
-/**
- * @var array of Message.
- */
-    private $Messages = array();
 
-/**
- * Accessor
- * @return string
- */
-    //public function getTransactionId() { return $this->TransactionId; }
-/**
- * Accessor
- * @return string
- */
+    public function getValidAddress() { return $this->ValidAddress; }
     public function getResultCode() { return $this->ResultCode; }
-/**
- * Accessor
- * @return array
- */
-    public function getMessages() { 
-    return $this->Messages; }
-    
-    //@author:swetal
-    
-    //public function isTaxable()
-    //{
-    //    return $this->Taxable;
-    //}
+    public function getMessages() { return $this->Messages; }
 
 }
 

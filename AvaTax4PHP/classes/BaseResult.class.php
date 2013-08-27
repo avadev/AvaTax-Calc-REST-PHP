@@ -15,11 +15,8 @@
 class BaseResult
 {
 
-//@author:swetal
-//Removed declarations of variable as it was creating problem due to bug in SoapClient
-
 /**
- * A unique Transaction ID identifying a specific request/response set.
+ * A unique Transaction ID identifying a specific request/response set. Deprecated.
  * @return string
  */
     public function getTransactionId() { return $this->TransactionId; }
