@@ -4,9 +4,7 @@
  */
  
  /**
- * Contains Tax data; Retunded form {@link AddressServiceSoap#getTax};
- * Also part of the {@link GetTaxRequest}
- * result returned from the {@link TaxServiceSoap#getTax} tax calculation service;
+ * Contains Tax line data; Returned from {@link TaxServiceRest#getTax} as part of GetTaxResult;
  * 
  * @author    Avalara
  * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
@@ -53,7 +51,8 @@ class TaxLine
 		$this->TaxDetails = $TaxDetails ; 
 	
 	}
-	
+
+    //Helper function to decode result objects from Json responses to specific objects.	
 	public static function parseTaxLines($jsonString)
 	{
 		$object = json_decode($jsonString);

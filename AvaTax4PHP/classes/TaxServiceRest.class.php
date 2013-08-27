@@ -1,32 +1,28 @@
 <?php
 /**
- * TaxServiceSoap.class.php
+ * TaxServiceRest.class.php
  */
 
 /**
- * Proxy interface for the Avalara Tax Web Service.  It contains methods that perform remote calls
- * to the Avalara Tax Service. 
  *
- * TaxServiceSoap reads its configuration values from static variables defined
- * in ATConfig.class.php. This file must be properly configured with your security credentials.
+ * TaxServiceRest reads its configuration values from parameters in the constructor
  *
  * <p>
  * <b>Example:</b>
  * <pre>
- *  $taxService = new TaxServiceSoap();
- *  $result = $taxService->ping();
+ *  $taxService = new TaxServiceRest("https://development.avalara.net","1100012345","1A2B3C4D5E6F7G8");
  * </pre>
  *
  * @author    Avalara
  * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
+ * 
  */
-
 
 class TaxServiceRest
 {
     static protected $classmap = array(
-        'BaseAddress' => 'Address',
+        'Address' => 'Address',
         'ValidAddress' => 'ValidAddress',
         'Message' => 'Message',
         'ValidateRequest' => 'ValidateRequest',
@@ -52,6 +48,7 @@ class TaxServiceRest
     		                            
     } 
 
+	//Voids a document that has already been recorded on the Admin Console.
     public function cancelTax(&$cancelTaxRequest)
     {
 		$url = $this->config['url']."/1.0/tax/cancel";
@@ -68,6 +65,7 @@ class TaxServiceRest
         return CancelTaxResult::parseResult($curl_response);
     }
 
+	//Calculates tax on a document and/or records that document to the Admin Console.
 	public function getTax(&$getTaxRequest)
     {
     	
@@ -89,6 +87,7 @@ class TaxServiceRest
 		
     }
 
+	//Estimates a composite tax based on latitude/longitude and total sale amount.
 	public function estimateTax(&$estimateTaxRequest)
 	{
 		$url =  $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
@@ -103,8 +102,8 @@ class TaxServiceRest
 		return EstimateTaxResult::parseResult($curl_response);
 		
 	}
-	/*
-	There is no explicit ping function in the REST API, so here's an imitation.*/
+	
+	//There is no explicit ping function in the REST API, so here's an imitation.
 	public function ping($msg = "")
 	{
 		$request = new EstimateTaxRequest("47.627935","-122.51702","10");

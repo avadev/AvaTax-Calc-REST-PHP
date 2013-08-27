@@ -18,8 +18,8 @@
 class GetTaxRequest 
 {
 	public $CompanyCode; // string
-	public $DocCode;
-	public $DocType;
+	public $DocCode;	//string
+	public $DocType;	//DocumentType
     public $DocDate;				//date
     public $CustomerCode;			//string
     public $CustomerUsageType;		//string   Entity Usage
@@ -33,9 +33,9 @@ class GetTaxRequest
     public $Commit=false;			//boolean
     
     public $TaxOverride;		//TaxOverride
-	public $PosLaneCode;
-	public $Client = "PHP REST Sample, 1.0";
-	public $BusinessIdentificationNo;
+	public $PosLaneCode;		//string
+	public $Client = "PHP REST Sample, 1.0"; //string, should uniquely identify the software client making the call to the service.
+	public $BusinessIdentificationNo; //string, VAT ID for VAT calculations.
 	
     
     
@@ -47,7 +47,7 @@ class GetTaxRequest
 		$this->DocDate = date("Y-m-d");
 		$this->Commit=false;
 		$this->DocType=DocumentType::$SalesOrder;
-		$this->DetailLevel=DetailLevel::$Document;
+		$this->DetailLevel=DetailLevel::$Tax;
 		$this->DocCode = date("Y-m-d-H-i-s.u");
 		$this->CustomerCode='CustomerCodeString';
 		$this->Lines=array(new Line());							

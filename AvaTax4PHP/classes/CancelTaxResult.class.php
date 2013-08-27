@@ -4,7 +4,7 @@
  */
 
 /**
- * Result data returned from {@link TaxSvcSoap#cancelTax}
+ * Result data returned from {@link TaxSvcRest#cancelTax}
  * @see CancelTaxRequest
  *  
  * @author    Avalara
@@ -13,24 +13,14 @@
  * 
  */
 
-class CancelTaxResult // extends BaseResult
+class CancelTaxResult 
 {
     
 
-// BaseResult innards - workaround a bug in SoapClient
-	private $DocId;
-/**
- * @var string
- */
-    private $TransactionId;
-/**
- * @var string must be one of the values defined in {@link SeverityLevel}.
- */
-    private $ResultCode = 'Success';
-/**
- * @var array of Message.
- */
-    private $Messages = array();
+	private $DocId; //Internal Avalara reference to document - may not be returned for some accounts
+	private $TransactionId; //Internal Avalara reference to server transaction - may not be returned for some accounts
+    private $ResultCode = 'Success'; //string, must be one of the values defined in {@link SeverityLevel}.
+    private $Messages = array(); //array of Message.
     
     
     public function __constructor($docId, $transactionId, $resultCode, $messages)
@@ -41,6 +31,7 @@ class CancelTaxResult // extends BaseResult
     	$this->Messages = $messages;
     }
     
+    //Helper function to decode result objects from Json responses to specific objects.
     public function parseResult($jsonString)
     {
 		$object = json_decode($jsonString);
@@ -56,20 +47,8 @@ class CancelTaxResult // extends BaseResult
     
 
     public function getDocId() { return $this->DocId; }
-/**
- * Accessor
- * @return string
- */
     public function getTransactionId() { return $this->TransactionId; }
-/**
- * Accessor
- * @return string
- */
     public function getResultCode() { return $this->ResultCode; }
-/**
- * Accessor
- * @return array
- */
     public function getMessages() { return $this->Messages; }
 
 

@@ -7,15 +7,17 @@ $client = new TaxServiceRest(
 	"", //TODO: Enter Username or Account Number
 	""); //TODO: Enter Password or License Key
 	
-	$latitude = "47.627935";
-	$longitude = "-122.51702";
-	$saleAmount = "10";
+	$latitude = "47.627935";			// R: Latitude of location
+	$longitude = "-122.51702";			// R: Longitude of location
+	$saleAmount = "10";					// R: Total sale amount
 	$request = new EstimateTaxRequest($latitude, $longitude, $saleAmount);
 
 try
 {
 	$result = $client->estimateTax($request);
 	echo 'Estimate ResultCode is: '. $result->getResultCode()."\n";
+	
+	//If the call failed, display error messages.
 	if($result->getResultCode() != SeverityLevel::$Success)	// call failed
 	{	
 		foreach($result->getMessages() as $msg)
@@ -23,7 +25,8 @@ try
 			echo $msg->getSeverity().": ".$msg->getSummary()."\n";
 		}
 
-	} 
+	}
+	//If the call succeeded, display the tax calculation details.
 	else
 	{
 		print_r($result->getTaxDetails());
@@ -34,10 +37,8 @@ catch(SoapFault $exception)
 	$msg = "Exception: ";
 	if($exception)
 		$msg .= $exception->faultstring;
-
 	echo $msg."\n";
-	echo $client->__getLastRequest()."\n";
-	echo $client->__getLastResponse()."\n";
+
 }	
 	
 ?>
