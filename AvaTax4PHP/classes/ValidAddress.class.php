@@ -38,7 +38,6 @@ class ValidAddress
 	public $Region;
 	public $PostalCode;
     public $Country = 'US';
-    public $TaxRegionId;
     public $County;
     public $FipsCode;
     public $CarrierRoute;
@@ -46,7 +45,7 @@ class ValidAddress
     public $AddressType;
 
 
-    public function __construct($line1=null,$line2=null, $line3=null,$city=null,$region=null,$postalCode=null, $country='US', $taxRegionId=null, $county=null, $fipsCode=null, $carrierRoute=null, $postNet=null, $addressType=null)
+    public function __construct($line1=null,$line2=null, $line3=null,$city=null,$region=null,$postalCode=null, $country='US', $county=null, $fipsCode=null, $carrierRoute=null, $postNet=null, $addressType=null)
     {
 		$this->Line1 = $line1;
         $this->Line2 = $line2;
@@ -55,7 +54,6 @@ class ValidAddress
         $this->Region = $region;
         $this->PostalCode = $postalCode;
         $this->Country = $country;
-        $this->TaxRegionId = $taxRegionId;
         $this->County = $county;
     	$this->FipsCode = $fipsCode;
     	$this->CarrierRoute = $carrierRoute;
@@ -75,7 +73,6 @@ class ValidAddress
     		$object->Region,
     		$object->PostalCode,
     		$object->Country,
-    		$object->TaxRegionId,
     		$object->County,
     		$object->FipsCode,
     		$object->CarrierRoute,
@@ -93,7 +90,6 @@ class ValidAddress
     public function setRegion($value) { $this->Region = $value; }
     public function setPostalCode($value) { $this->PostalCode = $value;  }
     public function setCountry($value) { $this->Country = $value; }
-    public function setTaxRegionId($value) { $this->TaxRegionId = $value;  }
 	public function setcounty($value) { $this->County = $value; }
 	public function setfipsCode($value) { $this->FipsCode = $value; }
 	public function setpostNet($value) { $this->PostNet = $value; }
@@ -108,7 +104,6 @@ class ValidAddress
     public function getRegion() { return $this->Region; }
     public function getPostalCode() { return $this->PostalCode; }
     public function getCountry() { return $this->AddressCode; }
-    public function getTaxRegionId() { return $this->TaxRegionId; }
 	public function getcounty() { return $this->County; }
 	public function getfipsCode() { return $this->FipsCode; }
 	public function getpostNet() { return $this->PostNet; }

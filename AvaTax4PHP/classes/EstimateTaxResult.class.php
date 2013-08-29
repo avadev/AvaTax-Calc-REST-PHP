@@ -29,6 +29,8 @@ class EstimateTaxResult extends BaseResult
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);
+		$taxdetails = array();
+		$messages = array();
 		if(property_exists($object, "TaxDetails"))
 		{
 		$taxdetails = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxDetails)."}");		
@@ -37,7 +39,6 @@ class EstimateTaxResult extends BaseResult
 		{
 		$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
 		}
-		print_r($messages);
 		return new self( $object->ResultCode , $object->Rate, $object->Tax , $taxdetails, $messages );
 	
 	
