@@ -59,6 +59,7 @@ class TaxServiceRest
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //Some Windows users have had trouble with our SSL Certificates. Uncomment this line to NOT use SSL.
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
@@ -81,6 +82,7 @@ class TaxServiceRest
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //Some Windows users have had trouble with our SSL Certificates. Uncomment this line to NOT use SSL.
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);

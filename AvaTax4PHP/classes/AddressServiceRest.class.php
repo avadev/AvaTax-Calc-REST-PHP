@@ -54,6 +54,7 @@ class AddressServiceRest
     	$url =  $this->config['url'].'/1.0/address/validate?'. http_build_query($validateRequest->getAddress());
     	$curl = curl_init();
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //Some Windows users have had trouble with our SSL Certificates. Uncomment this line to NOT use SSL.
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
