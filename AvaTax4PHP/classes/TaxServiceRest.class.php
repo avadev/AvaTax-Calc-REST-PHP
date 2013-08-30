@@ -51,6 +51,10 @@ class TaxServiceRest
 	//Voids a document that has already been recorded on the Admin Console.
     public function cancelTax(&$cancelTaxRequest)
     {
+    	if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
+		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
+		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
+		
 		$url = $this->config['url']."/1.0/tax/cancel";
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -68,6 +72,9 @@ class TaxServiceRest
 	//Calculates tax on a document and/or records that document to the Admin Console.
 	public function getTax(&$getTaxRequest)
     {
+    	if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
+		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
+		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
     	
 		$url = $this->config['url']."/1.0/tax/get";
 		
@@ -90,6 +97,10 @@ class TaxServiceRest
 	//Estimates a composite tax based on latitude/longitude and total sale amount.
 	public function estimateTax(&$estimateTaxRequest)
 	{
+		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
+		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
+		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
+
 		$url =  $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
     	$curl = curl_init();
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

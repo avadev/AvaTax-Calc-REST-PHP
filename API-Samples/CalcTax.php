@@ -111,11 +111,9 @@ $request = new GetTaxRequest();
                 echo $msg->getSummary() . "\n";
             }
         }
-    } catch (SoapFault $exception) {
-        $msg = "Exception: ";
-        if ($exception)
-            $msg .= $exception->faultstring;       
-        echo $msg . "\n";
-
+    } 
+catch(Exception $exception)
+{
+	echo $msg = "Exception: " . $exception->getMessage()."\n";
 }
 ?>

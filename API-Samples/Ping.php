@@ -6,7 +6,6 @@ $client = new TaxServiceRest(
 	"", // TODO: Enter service URL
 	"", //TODO: Enter Username or Account Number
 	""); //TODO: Enter Password or License Key
-	
 try
 {
 	$result = $client->ping(""); //Note: any parameter content passed to the Ping method will be ignored.
@@ -22,11 +21,7 @@ try
 }
 catch(Exception $exception)
 {
-	$msg = "Exception: ";
-	if($exception)
-		$msg .= $exception->faultstring;
-
-	echo $msg."\n";
+	echo $msg = "Exception: " . $exception->getMessage()."\n";
 }
 
 ?>

@@ -32,13 +32,9 @@ try
 		print_r($result->getTaxDetails());
 	}
 }
-catch(SoapFault $exception)
+catch(Exception $exception)
 {
-	$msg = "Exception: ";
-	if($exception)
-		$msg .= $exception->faultstring;
-	echo $msg."\n";
-
-}	
+	echo $msg = "Exception: " . $exception->getMessage()."\n";
+}
 	
 ?>

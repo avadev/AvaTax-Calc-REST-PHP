@@ -12,7 +12,7 @@ $client = new AddressServiceRest(
 try
 {
 	$address = new Address();
-	$address->setLine1("General Delivery");		//R: An address line is required for validation.
+	$address->setLine1("PO Box 123");		//R: An address line is required for validation.
 	$address->setCity("Bainbridge Island");		//R: Two of the three: city, region, postal code are required.
 	$address->setRegion("WA");
 	$address->setPostalCode("98110");
@@ -60,9 +60,7 @@ try
 
 catch(Exception $exception)
 {
-	$msg = "Exception: ";
-	if($exception)
-		$msg .= $exception->faultstring;
-}   
+	echo $msg = "Exception: " . $exception->getMessage()."\n";
+}  
 
 ?>
