@@ -36,11 +36,19 @@ class CancelTaxResult
     {
 		$object = json_decode($jsonString);
 		$messages = array();	
-		if(property_exists($object, "Messages"))
-		{
+		$docid= null;
+		$transactionid= null;
+		$resultcode= null;
+		
+		if(property_exists($object, "Messages"))  
 			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-		}		
-		return new self($object->DocId, $object->TransactionId, $object->ResultCode , $messages );	    
+	
+		
+		if(property_exists($object, "DocId")) $docid = $object->DocId;
+		if(property_exists($object, "TransactionId"))	$transactionid = $object->TransactionId;
+		if(property_exists($object, "ResultCode")) $resultcode = $object->ResultCode; 
+		
+		return new self($docid, $transactionid, $resultcode , $messages );	    
     
     
     }

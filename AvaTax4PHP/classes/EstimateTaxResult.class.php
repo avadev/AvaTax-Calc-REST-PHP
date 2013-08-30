@@ -31,15 +31,19 @@ class EstimateTaxResult extends BaseResult
 		$object = json_decode($jsonString);
 		$taxdetails = array();
 		$messages = array();
+		$resultcode = null;
+		$rate = null;
+		$tax = null;
+
+		if( property_exists($object,"Rate")) $rate = $object->Rate; 
+		if( property_exists($object,"Tax")) $tax = $object->Tax; 		
+		if( property_exists($object,"ResultCode")) $resultcode = $object->ResultCode; 
 		if(property_exists($object, "TaxDetails"))
-		{
-		$taxdetails = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxDetails)."}");		
-		}
+			$taxdetails = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxDetails)."}");		
 		if(property_exists($object, "Messages"))
-		{
-		$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-		}
-		return new self( $object->ResultCode , $object->Rate, $object->Tax , $taxdetails, $messages );
+			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
+
+		return new self( $resultcode , $rate, $tax , $taxdetails, $messages );
 	
 	
 	}
@@ -81,8 +85,7 @@ class EstimateTaxResult extends BaseResult
  * Accessor
  * @return array
  */
-    public function getMessages() { 
-    $this->Messages; }
+    public function getMessages() { return $this->Messages; }
     
     //@author:swetal
     

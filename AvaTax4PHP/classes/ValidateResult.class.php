@@ -54,16 +54,15 @@ class ValidateResult extends BaseResult
 		$object = json_decode($jsonString);
 		$validaddress = new ValidAddress();
 		$messages = array();
+		$resultcode = null;
 		
+		if( property_exists($object,"ResultCode")) $resultcode = $object->ResultCode; 		
 		if(property_exists($object, "Address"))
-		{
-			$validaddress = ValidAddress::parseAddress(json_encode($object->Address));
-		}	
+			$validaddress = ValidAddress::parseAddress(json_encode($object->Address));	
 		if(property_exists($object, "Messages"))
-		{
 			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-		}		
-		return new self( $object->ResultCode , $validaddress , $messages );	
+		
+		return new self( $resultcode , $validaddress , $messages );	
 	}
 
 

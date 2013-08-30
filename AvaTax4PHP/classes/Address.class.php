@@ -61,18 +61,42 @@ class Address
     public static function parseAddress($jsonString)
     {
     	$object = json_decode($jsonString);
+		$AddressCode = null;
+		$Line1 = null;
+		$Line2 = null;
+		$Line3 = null;
+		$City = null;
+		$Region = null;
+		$PostalCode = null;
+		$Country = null;
+		$TaxRegionId = null;
+		$Latitude = null;
+		$Longitude = null;
+		
+		if (property_exists($object,"AddressCode")) $AddressCode = $object->AddressCode;
+		if (property_exists($object,"Line1"))	$Line1 = $object->Line1;
+		if (property_exists($object,"Line2"))	$Line2 = $object->Line2;
+		if (property_exists($object,"Line3"))	$Line3 = $object->Line3;
+		if (property_exists($object,"City"))	$City = $object->City;
+		if (property_exists($object,"Region"))	$Region = $object->Region;
+		if (property_exists($object,"PostalCode"))	$PostalCode = $object->PostalCode;
+		if (property_exists($object,"Country"))	$Country = $object->Country;
+		if (property_exists($object,"TaxRegionId"))	$TaxRegionId = $object->TaxRegionId;
+		if (property_exists($object,"Latitude"))	$Latitude = $object->Latitude;
+		if (property_exists($object,"Longitude"))	$Longitude = $object->Longitude;
+    		
     	return new self(
-    		$object->AddressCode,
-    		$object->Line1,
-    		$object->Line2,
-    		$object->Line3,
-    		$object->City,
-    		$object->Region,
-    		$object->PostalCode,
-    		$object->Country,
-    		$object->TaxRegionId,
-    		$object->Latitude,
-    		$object->Longitude);
+			$AddressCode,
+			$Line1,
+			$Line2,
+			$Line3,
+			$City,
+			$Region,
+			$PostalCode,
+			$Country,
+			$TaxRegionId,
+			$Latitude,
+			$Longitude);
     		
     	
     }

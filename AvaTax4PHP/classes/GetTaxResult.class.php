@@ -59,25 +59,44 @@ class GetTaxResult // extends BaseResult
 		$taxsummary = array();
 		$taxaddresses = array();
 		$messages = array();
+		$resultcode= null;
+		$doccode= null;
+		$docdate= null;
+		$timestamp= null;
+		$totalamount= null;
+		$totaldiscount= null;
+		$totalexemption= null;
+		$totaltaxable= null;
+		$totaltax= null;
+		$totaltaxcalculated= null;
+		$taxdate= null;
+
+		if( property_exists($object,"ResultCode")) $resultcode = $object->ResultCode; 		
+		if( property_exists($object,"DocCode")) $doccode = $object->DocCode; 
+		if( property_exists($object,"DocDate")) $docdate = $object->DocDate;			 				
+		if( property_exists($object,"Timestamp")) $timestamp = $object->Timestamp;			
+		if( property_exists($object,"TotalAmount")) $totalamount = $object->TotalAmount;		
+		if( property_exists($object,"TotalDiscount")) $totaldiscount = $object->TotalDiscount;	
+		if( property_exists($object,"TotalExemption")) $totalexemption = $object->TotalExemption;	
+		if( property_exists($object,"TotalTaxable")) $totaltaxable = $object->TotalTaxable;	 
+		if( property_exists($object,"TotalTax")) $totaltax = $object->TotalTax;		  	
+		if( property_exists($object,"TotalTaxCalculated")) $totaltaxcalculated = $object->TotalTaxCalculated;		 
+		if( property_exists($object,"TaxDate")) $taxdate = $object->TaxDate;		
+
 		
 		if(property_exists($object, "TaxLines"))
-		{
 			$taxlines = TaxLine::parseTaxLines("{\"TaxLines\": ".json_encode($object->TaxLines)."}");
-		}
 		if(property_exists($object, "TaxSummary"))
-		{
 			$taxsummary = TaxDetail::parseTaxDetails("{\"TaxSummary\": ".json_encode($object->TaxSummary)."}");
-		}
 		if(property_exists($object, "TaxAddresses"))
-		{
-			$taxsaddresses = Address::parseAddress("{\"TaxAddresses\": ".json_encode($object->TaxAddresses)."}");
-		}	
+			$taxaddresses = Address::parseAddress("{\"TaxAddresses\": ".json_encode($object->TaxAddresses)."}");	
 		if(property_exists($object, "Messages"))
-		{
 			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-		}		
-		return new self( $object->ResultCode , $messages, $object->DocCode, $object->DocDate, $object->Timestamp, $object->TotalAmount, $object->TotalDiscount, $object->TotalExemption, $object->TotalTaxable, $object->TotalTax, $object->TotalTaxCalculated, 
-			$object->TaxDate, $taxlines, $taxsummary, $taxaddresses );	
+		
+		return new self( $resultcode , $messages, $doccode, $docdate, 
+		$timestamp, $totalamount, $totaldiscount,
+		$totalexemption, $totaltaxable, $totaltax, $totaltaxcalculated,
+		$taxdate, $taxlines, $taxsummary, $taxaddresses );	
 	}
 
 
@@ -131,10 +150,6 @@ class GetTaxResult // extends BaseResult
 			
 	/////////////////////////////////////////////PHP bug requires this copy from BaseResult ///////////
 	/**
-	* @var string
-	*/
-    private $TransactionId;
-	/**
 	* @var string must be one of the values defined in {@link SeverityLevel}.
 	*/
     private $ResultCode = 'Success';
@@ -143,11 +158,6 @@ class GetTaxResult // extends BaseResult
 	*/
     private $Messages = array();
 
-	/**
-	* Accessor
-	* @return string
-	*/
-    public function getTransactionId() { return $this->TransactionId; }
 	/**
 	* Accessor
 	* @return string

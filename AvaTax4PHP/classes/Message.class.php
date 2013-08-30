@@ -35,15 +35,26 @@ class Message
     {
 		$object = json_decode($jsonString);
 		$messageArray = array();
+		$summary = null;
+		$details = null;
+		$refersto = null;
+		$severity = null;
+		$source = null;
+		
 		foreach($object->Messages as $message)
 		{
+				if( property_exists($message,'Summary'))  $summary = $message->Summary;
+				if( property_exists($message,'Details'))  $details = $message->Details;
+				if( property_exists($message,'RefersTo'))  $refersto = $message->RefersTo;
+				if( property_exists($message,'Severity')) $severity = $message->Severity;
+				if( property_exists($message,'Source'))  $source = $message->Source;
 
 			$messageArray[] =  new self(
-				$message->Summary,
-				$message->Details,
-				$message->RefersTo,
-				$message->Severity,
-				$message->Source);
+				$summary,
+				$details,
+				$refersto,
+				$severity,
+				$source);
 		}
 
 		return $messageArray;
