@@ -9,7 +9,9 @@
  * Defines class loading search path.
  */
  
-function __autoload($class_name) 
+spl_autoload_register('avataxAutoloader');
+
+function avataxAutoloader($class_name) 
 { 	
 	
 	$path=dirname(__FILE__).'/classes/'.$class_name . '.class.php';
@@ -18,6 +20,7 @@ function __autoload($class_name)
     
      
 }
+
 
 function EnsureIsArray( $obj ) 
 {
