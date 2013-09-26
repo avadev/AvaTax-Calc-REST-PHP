@@ -9,16 +9,57 @@
  * Defines class loading search path.
  */
  
+
+//This will automatically register all classes you will need. If you have a special case that does not permit you to use the spl_autoload_register, the commented code block below will manually register all required classes.
 spl_autoload_register('avataxAutoloader');
+
+
+
+/*
+$arrayofclasses = array(
+	"Enum",
+	"Address",
+	"AddressServiceRest",
+	"AddressType",
+	"BaseResult",
+	"CancelCode",
+	"CancelTaxRequest",
+	"CancelTaxResult",
+	"DetailLevel",
+	"DocumentType",
+
+	"EstimateTaxRequest",
+	"EstimateTaxResult",
+	"GetTaxRequest",
+	"GetTaxResult",
+	"JurisdictionType",
+	"Line",
+	"Message",
+	"SeverityLevel",
+	"TaxDetail",
+	"TaxLine",
+	"TaxOverride",
+	"TaxOverrideType",
+	"TaxServiceRest",
+	"ValidAddress",
+	"ValidateRequest",
+	"ValidateResult"	
+);
+
+foreach($arrayofclasses as $value)
+{
+	avataxAutoloader($value);	
+}
+
+*/
 
 function avataxAutoloader($class_name) 
 { 	
 	
-	$path=dirname(__FILE__).'/classes/'.$class_name . '.class.php';
+	$path=dirname(__FILE__).'/classes/'.$class_name.'.class.php';
 	
 	require_once $path;
-    
-     
+         
 }
 
 
