@@ -14,7 +14,7 @@ $request = new GetTaxRequest();
 //     O: Indicates Optional Element
 //
     $dateTime = new DateTime();                                  // R: Sets dateTime format 
-    $request->setCompanyCode("SDKsss");                    // R: Company Code from the accounts Admin Console
+    $request->setCompanyCode("SDK");                    // R: Company Code from the accounts Admin Console
     $request->setDocType(DocumentType::$SalesOrder);                           // R: Typically SalesOrder,SalesInvoice, ReturnInvoice
     $request->setDocCode("INV123123");                          // R: Invoice or document tracking number - Must be unique
     $request->setDocDate(date_format($dateTime, "Y-m-d"));  // R: Date the document is processed and Taxed - See TaxDate

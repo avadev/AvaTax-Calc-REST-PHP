@@ -75,7 +75,7 @@ class TaxLine
 					$line->Rate,
 					$line->Tax, 
 					$line->TaxCalculated, 
-					$line->TaxDetails
+					$taxdetails
 				);
 
 		}
@@ -83,7 +83,7 @@ class TaxLine
 		return $lineArray;
 	}
 	
-    public function getTaxDetails() { return EnsureIsArray($this->TaxDetails->TaxDetail); }	
+    public function getTaxDetails() { return $this->TaxDetails; }	
 	public function getLineNo() { return $this->LineNo;} 
 	public function getTaxCode() { return $this->TaxCode;}
 	public function getTaxability() { return $this->Taxability;}
