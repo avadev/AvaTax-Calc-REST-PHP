@@ -58,10 +58,14 @@ class TaxDetail
 
     	foreach($object->TaxDetails as $detail)
     	{
+			$taxable = 0;
+			if ($detail->Rate != 0) {
+				$taxable = $detail->Tax / $detail->Rate;
+			}
 
     		$detailArray[] =  new self(
 				$detail->JurisType,      	
-				$detail->Tax / $detail->Rate ,   
+				$taxable,   
 				$detail->Rate,	
 				$detail->Tax,
 				$detail->JurisName,   
