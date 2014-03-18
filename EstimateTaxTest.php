@@ -1,40 +1,36 @@
 <?php
+require('AvaTaxClasses/AvaTax.php');
 
-require('../AvaTax4PHP/AvaTax.php');            // location of the AvaTax.PHP Classes - Required
-
-$client = new TaxServiceRest(
-	"", // TODO: Enter service URL
-	"", //TODO: Enter Username or Account Number
-	""); //TODO: Enter Password or License Key
+// Header Level Elements
+// Required Header Level Elements
+$serviceURL = "https://development.avalara.net";
+$accountNumber = "1234567890";
+$licenseKey = "A1B2C3D4E5F6G7H8";
 	
-	$latitude = "47.627935";			// R: Latitude of location
-	$longitude = "-122.51702";			// R: Longitude of location
-	$saleAmount = "10";					// R: Total sale amount
-	$request = new EstimateTaxRequest($latitude, $longitude, $saleAmount);
+$taxSvc = new TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
 
-try
-{
-	$result = $client->estimateTax($request);
-	echo 'Estimate ResultCode is: '. $result->getResultCode()."\n";
-	
-	//If the call failed, display error messages.
-	if($result->getResultCode() != SeverityLevel::$Success)	// call failed
-	{	
-		foreach($result->getMessages() as $msg)
-		{
-			echo $msg->getSeverity().": ".$msg->getSummary()."\n";
-		}
+// Required Request Parameters
+$latitude = 47.627935;
+$longitude = -122.51702;
+$saleAmount = 10;
 
-	}
-	//If the call succeeded, display the tax calculation details.
-	else
+$estimateTaxRequest = new EstimateTaxRequest($latitude, $longitude, $saleAmount);
+$geoTaxResult = $taxSvc->estimateTax($estimateTaxRequest);
+
+//Print Results
+echo 'EstimateTaxTest Result: ' . $geoTaxResult->getResultCode()."\n";
+if($geoTaxResult->getResultCode() != SeverityLevel::$Success)	// call failed
+{	
+	foreach($geoTaxResult->getMessages() as $message)
 	{
-		print_r($result->getTaxDetails());
+		echo $message->getSeverity() . ": " . $message->getSummary()."\n";
 	}
 }
-catch(Exception $exception)
+else
 {
-	echo $msg = "Exception: " . $exception->getMessage()."\n";
-}
-	
+	foreach($geoTaxResult->getTaxDetails() as $taxDetail)
+	{
+		echo "    " . "Jurisdiction: " . $taxDetail->getJurisName() . " Tax: " . $taxDetail->getTax();
+	}
+}	
 ?>

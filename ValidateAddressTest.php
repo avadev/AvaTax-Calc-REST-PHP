@@ -1,66 +1,48 @@
 <?php
+require('AvaTaxClasses/AvaTax.php');
 
-require('../AvaTax4PHP/AvaTax.php');            // location of the AvaTax.PHP Classes - Required
-
-$client = new AddressServiceRest(
-	"", // TODO: Enter service URL
-	"", //TODO: Enter Username or Account Number
-	""); //TODO: Enter Password or License Key
+// Header Level Elements
+// Required Header Level Elements
+$serviceURL = "https://development.avalara.net";
+$accountNumber = "1234567890";
+$licenseKey = "A1B2C3D4E5F6G7H8";
 	
+$addressSvc = new AddressServiceRest($serviceURL, $accountNumber, $licenseKey);
+$address = new Address();
 
-//address variables are assigned to address objects
-try
-{
-	$address = new Address();
-	$address->setLine1("PO Box 123");		//R: An address line is required for validation.
-	$address->setCity("Bainbridge Island");		//R: Two of the three: city, region, postal code are required.
-	$address->setRegion("WA");
-	$address->setPostalCode("98110");
+// Required Request Parameters
+$address->setLine1("118 N Clark St");
+$address->setCity("Chicago");
+$address->setRegion("IL");
 
+// Optional Request Parameters
+$address->setLine2("Suite 100");
+$address->setLine3("ATTN Accounts Payable");
+$address->setCountry("US");
+$address->setPostalCode("60602");
 
-// Build Address object into an array
-        
-	$request = new ValidateRequest($address);
-	$result = $client->Validate($request);
+$validateRequest = new ValidateRequest();
+$validateRequest->setAddress($address);
+$validateResult = $addressSvc->Validate($validateRequest);
 
-// Output to console the result (Success or Not Success)
-// If not Success return Error Message results
-// If Success - retune Normalized address
-// If corrdinates = 1 return latitude and longitude
-	echo "\n".'Validate ResultCode is: '. $result->getResultCode()."\n";
-	if($result->getResultCode() != SeverityLevel::$Success)
+//Print Results
+echo 'ValidateAddressTest Result: ' . $validateResult->getResultCode() . "\n";
+if($validateResult->getResultCode() != SeverityLevel::$Success)	// call failed
+{	
+	foreach($validateResult->getMessages() as $message)
 	{
-		foreach($result->getMessages() as $msg)
-		{
-			echo $msg->getSeverity().": ".$msg->getSummary()."\n";
-		}
+		echo $message->getSeverity() . ": " . $message->getSummary()."\n";
 	}
-	else
-	{
-		echo "Normalized Address:\n";
-	   	$valid = $result->getvalidAddress();
-
-		echo "Line 1: ".$valid->getline1()."\n";
-		echo "Line 2: ".$valid->getline2()."\n";
-		echo "Line 3: ".$valid->getline3()."\n";
-		echo "City: ".$valid->getcity()."\n";
-		echo "Region: ".$valid->getregion()."\n";
-		echo "Postal Code: ".$valid->getpostalCode()."\n";
-		echo "Country: ".$valid->getcountry()."\n";
-		echo "County: ".$valid->getcounty()."\n";
-		echo "FIPS Code: ".$valid->getfipsCode()."\n";
-		echo "PostNet: ".$valid->getpostNet()."\n";
-		echo "Carrier Route: ".$valid->getcarrierRoute()."\n";
-		echo "Address Type: ".$valid->getaddressType()."\n";
-
-	}
-   
 }
-
-
-catch(Exception $exception)
+else
 {
-	echo $msg = "Exception: " . $exception->getMessage()."\n";
-}  
-
+	echo $validateResult->getValidAddress()->getLine1()
+	                    . " " 
+	                    . $validateResult->getValidAddress()->getCity()
+	                    . ", "
+	                    . $validateResult->getValidAddress()->getRegion()
+	                    . " " 
+	                    . $validateResult->getValidAddress()->getPostalCode() . "\n";
+	
+}
 ?>
