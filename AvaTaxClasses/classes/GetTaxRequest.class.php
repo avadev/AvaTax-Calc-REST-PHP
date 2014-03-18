@@ -31,12 +31,12 @@ class GetTaxRequest
     public $DetailLevel;			//Summary or Document or Line or Tax or Diagnostic
     public $ReferenceCode; 		// string        
     public $Commit=false;			//boolean
-    
+
     public $TaxOverride;		//TaxOverride
 	public $PosLaneCode;		//string
 	public $Client = "PHP REST Sample, 1.0"; //string, should uniquely identify the software client making the call to the service.
 	public $BusinessIdentificationNo; //string, VAT ID for VAT calculations.
-	
+    public $CurrencyCode;		//string	
     
     
     
@@ -72,6 +72,7 @@ class GetTaxRequest
 	public function setPosLaneCode($value) { $this->PosLaneCode = $value; }
 	public function setClient($value) { $this->Client = $value; }
 	public function setBusinessIdentificationNo($value) { $this->BusinessIdentificationNo = $value; }
+    public function setCurrencyCode($value) { $this->CurrencyCode = $value; }				
 	
 	public function getCompanyCode() {return $this->CompanyCode; } 
 	public function getDocCode() {return $this->DocCode; }
@@ -89,6 +90,8 @@ class GetTaxRequest
 	public function getClient() {return $this->Client; }
 	public function getBusinessIdentificationNo() {return $this->BusinessIdentificationNo; }
     public function getTaxOverride() {return $this->TaxOverride;}
+    public function getCurrencyCode() {return $this->CurrencyCode; }			
+	
     public function getAddresses() 
 	{
 		return is_array($this->Addresses) ? $this->Addresses : EnsureIsArray($this->Addresses->BaseAddress);	
