@@ -66,7 +66,6 @@ class TaxServiceRest
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($cancelTaxRequest)); 
         $curl_response = curl_exec($curl);
         curl_close($curl);
-        
         return CancelTaxResult::parseResult($curl_response);
     }
 

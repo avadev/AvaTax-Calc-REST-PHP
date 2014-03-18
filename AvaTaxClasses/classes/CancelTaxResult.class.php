@@ -23,7 +23,7 @@ class CancelTaxResult
     private $Messages = array(); //array of Message.
     
     
-    public function __constructor($docId, $transactionId, $resultCode, $messages)
+    public function __construct($docId, $transactionId, $resultCode, $messages)
     {
     	$this->DocId = $docId;
     	$this->TransactionId = $transactionId;
@@ -38,19 +38,14 @@ class CancelTaxResult
 		$messages = array();	
 		$docid= null;
 		$transactionid= null;
-		$resultcode= null;
-		
+		$resultcode= null;		
 		if(property_exists($object, "Messages"))  
 			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-	
-		
+			
 		if(property_exists($object, "DocId")) $docid = $object->DocId;
 		if(property_exists($object, "TransactionId"))	$transactionid = $object->TransactionId;
 		if(property_exists($object, "ResultCode")) $resultcode = $object->ResultCode; 
-		
-		return new self($docid, $transactionid, $resultcode , $messages );	    
-    
-    
+		return new self($docid, $transactionid, $resultcode , $messages );	          
     }
     
 
