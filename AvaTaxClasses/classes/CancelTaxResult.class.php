@@ -13,7 +13,7 @@
  * 
  */
 
-class CancelTaxResult 
+class CancelTaxResult implements JsonSerializable
 {
     
 
@@ -54,7 +54,14 @@ class CancelTaxResult
     public function getResultCode() { return $this->ResultCode; }
     public function getMessages() { return $this->Messages; }
 
-
+	public function jsonSerialize(){
+		return[
+			'DocId' => $this=>getDocId(),
+			'TransactionId' => $this=>getTransactionId(),
+			'ResultCode' => $this=>getResultCode(),
+			'Messages' => $this=>getMessages(),
+		];
+	}
 
 }
 

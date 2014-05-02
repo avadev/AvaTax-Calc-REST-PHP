@@ -13,7 +13,7 @@
  * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
  */
 
-class Message
+class Message implements JsonSerializable
 {
     private $Summary;
     private $Details;
@@ -62,7 +62,16 @@ class Message
 
     }
     
-    
+
+	public function jsonSerialize(){
+		return[
+			'Summary' => $this=>getSummary(),
+			'Details' => $this=>getDetails(),
+			'RefersTo' => $this=>getRefersTo(),
+			'Severity' => $this=>getSeverity(),
+			'Source' => $this=>getSource()
+		];
+	}
     
     /**
      * Gets the concise summary of the message. 

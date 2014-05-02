@@ -27,7 +27,7 @@
  * @package   Address
  */
  
-class ValidAddress
+class ValidAddress implements JsonSerializable
 {
 
     public $AddressCode;
@@ -82,6 +82,22 @@ class ValidAddress
     	
     }
 
+	public function jsonSerialize(){
+		return[
+		    'Line1' => $this->getLine1(),
+		    'Line2' => $this->getLine2(),
+		    'Line3' => $this->getLine3(),
+		    'City' => $this->getCity(),
+		    'Region' => $this->getRegion(),
+		    'PostalCode' => $this->getPostalCode(),
+		    'Country' => $this->getAddressCode(),
+			'county' => $this->getCounty(),
+			'fipsCode' => $this->getFipsCode(),
+			'postNet' => $this->getPostNet(),
+			'carrierRoute' => $this->getCarrierRoute(),
+			'addressType' => $this->getAddressType()
+		];
+	}
 
     public function setLine1($value) { $this->Line1 = $value; }
     public function setLine2($value) { $this->Line2 = $value; }
