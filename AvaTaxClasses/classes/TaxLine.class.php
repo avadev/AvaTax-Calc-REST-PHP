@@ -11,7 +11,7 @@
  * @package   Tax
  */
 
-class TaxLine implements JsonSerializable 
+class TaxLine
 {
 
 	private $LineNo; //string 
@@ -82,22 +82,6 @@ class TaxLine implements JsonSerializable
 
 		return $lineArray;
 	}
-	public function jsonSerialize(){
-		return[
-			 'LineNo' => $this->getLineNo(), 
-			 'TaxCode' => $this->getTaxCode(),
-			 'Taxability' => $this->getTaxability(),  
-			 'BoundaryLevel' => $this->getBoundaryLevel(),  
-			 'Exemption' => $this->getExemption(),  
-			 'Discount' => $this->getDiscount(),
-			 'Taxable' => $this->getTaxable(),  
-			 'Rate' => $this->getRate(),
-			 'Tax' => $this->getTax(),
-			 'TaxCalculated' => $this->getTaxCalculated(),
-			 'TaxDetails' => $this->getTaxDetails(),
-		];
-	}
-	
 	
     public function getTaxDetails() { return $this->TaxDetails; }	
 	public function getLineNo() { return $this->LineNo;} 

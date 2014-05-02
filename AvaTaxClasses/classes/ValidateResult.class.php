@@ -30,7 +30,7 @@
  */
 
 
-class ValidateResult extends BaseResult implements JsonSerializable 
+class ValidateResult extends BaseResult
 {
 /**
  * Array of matching {@link ValidAddress}'s.
@@ -64,14 +64,7 @@ class ValidateResult extends BaseResult implements JsonSerializable
 		
 		return new self( $resultcode , $validaddress , $messages );	
 	}
-	
-	public function jsonSerialize(){
-		return[
-		    'ValidAddress' => $this->getValidAddress(), 
-		    'ResultCode' => $this->getResultCode(), 
-		    'Messages' => $this->getMessages(), 			
-		];
-	}
+
 
     public function getValidAddress() { return $this->ValidAddress; }
     public function getResultCode() { return $this->ResultCode; }

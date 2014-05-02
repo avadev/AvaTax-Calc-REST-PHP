@@ -12,16 +12,8 @@
  */
  
   
-class BaseResult implements JsonSerializable
+class BaseResult
 {
-
-	public function jsonSerialize(){
-		return[
-			'TransactionId' => $this->getTransactionId(),
-			'ResultCode' => $this=>getResultCode(),
-			'Messages' => $this=>getMessages(),
-		];
-	}
 
 /**
  * A unique Transaction ID identifying a specific request/response set. Deprecated.

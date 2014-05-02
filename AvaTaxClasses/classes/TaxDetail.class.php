@@ -15,7 +15,7 @@
  * @package   Tax
  */
 
-class TaxDetail implements JsonSerializable
+class TaxDetail
 {
 
 	private $JurisType;     //JurisdictionType 	
@@ -78,18 +78,6 @@ class TaxDetail implements JsonSerializable
 
     	return $detailArray;
     }
-	public function jsonSerialize() {
-		return[
-			'JurisType' => $this->getJurisType(),
-			'Taxable' => $this->getTaxable(),
-			'Rate' => $this->getRate(),
-			'Tax' => $this->getTax(),
-			'JurisName' => $this->getJurisName(),
-			'TaxName' => $this->getTaxName(),
-			'Country' => $this->getCountry(),
-			'Region' => $this->getRegion()			
-		];
-	}
 
 	 public function getJurisType(){ return $this->JurisType; } 
 	 public function getTaxable(){ return $this->Taxable; }   

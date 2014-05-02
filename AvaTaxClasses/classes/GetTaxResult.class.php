@@ -13,7 +13,7 @@
  * @package   Tax 
  */
 
-class GetTaxResult implements JsonSerializable // extends BaseResult
+class GetTaxResult // extends BaseResult
 {
   	  
 	private $DocCode;	//string  
@@ -99,23 +99,7 @@ class GetTaxResult implements JsonSerializable // extends BaseResult
 		$taxdate, $taxlines, $taxsummary, $taxaddresses );	
 	}
 
-	public function jsonSerialize(){
-		return[
-			'DocCode' => $this->getDocCode(), 
-			'DocDate' => $this->getDocDate(),			 				
-			'Timestamp' => $this->getTimestamp(),			
-			'TotalAmount' => $this->getTotalAmount(),		
-			'TotalDiscount' => $this->getTotalDiscount(),	
-			'TotalExemption' => $this->getTotalExemption(),	
-			'TotalTaxable' => $this->getTotalTaxable(),	 
-			'TotalTax' => $this->getTotalTax(),		  	
-			'TotalTaxCalculated' => $this->getTotalTaxCalculated(),		 
-			'TaxDate' => $this->getTaxDate(),		
-		 	'TaxLines' => $this->getTaxLines(),	
-			'TaxSummary' => $this->getTaxSummary(),		
-			'TaxAddresses' => $this->getTaxAddresses()
-		];
-	}
+
 
 	public function getDocCode() { return $this->DocCode; } 
 	public function getDocDate() { return $this->DocDate; }			 				
