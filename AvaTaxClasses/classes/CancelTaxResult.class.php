@@ -35,6 +35,7 @@ class CancelTaxResult
     public function parseResult($jsonString)
     {
 		$object = json_decode($jsonString);
+		if(property_exists($object,"CancelTaxResult")) $object = $object->CancelTaxResult;
 		$messages = array();	
 		$docid= null;
 		$transactionid= null;
