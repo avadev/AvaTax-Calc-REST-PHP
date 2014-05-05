@@ -5,7 +5,7 @@
  */
 
 
-class EstimateTaxResult extends BaseResult
+class EstimateTaxResult extends BaseResult implements JsonSerializable
 {
 /**
  * Returns composite rate and total tax for location, with an array of jurisdictional details.
@@ -46,6 +46,13 @@ class EstimateTaxResult extends BaseResult
 		return new self( $resultcode , $rate, $tax , $taxdetails, $messages );
 	
 	
+	}
+	public function jsonSerialize(){
+		return[
+		    'Rate' => $this->getRate(),
+		    'Tax' => $this->getTax(),	
+		    'TaxDetails' => $this->getTaxDetails()
+		];
 	}
 
 /**

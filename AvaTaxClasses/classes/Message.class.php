@@ -13,7 +13,7 @@
  * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
  */
 
-class Message
+class Message implements JsonSerializable
 {
     private $Summary;
     private $Details;
@@ -61,42 +61,20 @@ class Message
     	
 
     }
-    
-    
-    
-    /**
-     * Gets the concise summary of the message. 
-     *
-     * @return string
-     */    
+	public function jsonSerialize(){
+		return[
+		    'Summary' => $this->getSummary(),
+		    'Details' => $this->getDetails(),
+		    'RefersTo' => $this->getRefersTo(),
+		    'Severity' => $this->getSeverity(),
+		    'Source' => $this->getSource(),
+		];
+	}
+           
     public function getSummary() { return $this->Summary; }
-    
-    /**
-     * Gets the details of the message. 
-     *
-     * @return string
-     */
     public function getDetails() { return $this->Details; }
-    
-    /**
-     * Gets the item the message refers to, if applicable. Used to indicate a missing or incorrect value. 
-     *
-     * @return unknown
-     */
     public function getRefersTo() { return $this->RefersTo; }
-    
-    /**
-     * Gets the Severity Level of the message. 
-     *
-     * @return unknown
-     */
     public function getSeverity() { return $this->Severity; }
-    
-    /**
-     * Gets the source of the message.
-     *
-     * @return unknown
-     */
     public function getSource() { return $this->Source; }
     
     // mutators
