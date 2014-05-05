@@ -51,7 +51,9 @@ class EstimateTaxResult extends BaseResult implements JsonSerializable
 		return[
 		    'Rate' => $this->getRate(),
 		    'Tax' => $this->getTax(),	
-		    'TaxDetails' => $this->getTaxDetails()
+		    'TaxDetails' => $this->getTaxDetails(),
+			'ResultCode' => $this->getResultCode(),
+			'Messages' => $this->getMessages()
 		];
 	}
 
