@@ -10,11 +10,11 @@ class EstimateTaxResult extends BaseResult implements JsonSerializable
 /**
  * Returns composite rate and total tax for location, with an array of jurisdictional details.
  */
-    private $Rate;
-    private $Tax;
-    private $TaxDetails = array();
-    
-        
+	private $Rate;
+	private $Tax;
+	private $TaxDetails = array();
+
+
 	public function __construct($resultCode , $rate , $tax, $taxdetails, $messages)
 	{
 		$this->ResultCode = $resultCode;
@@ -25,7 +25,7 @@ class EstimateTaxResult extends BaseResult implements JsonSerializable
 	}
 	
 	
-    //Helper function to decode result objects from Json responses to specific objects.	
+		//Helper function to decode result objects from Json responses to specific objects.
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);
@@ -44,14 +44,13 @@ class EstimateTaxResult extends BaseResult implements JsonSerializable
 			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
 
 		return new self( $resultcode , $rate, $tax , $taxdetails, $messages );
-	
-	
 	}
+
 	public function jsonSerialize(){
 		return[
-		    'Rate' => $this->getRate(),
-		    'Tax' => $this->getTax(),	
-		    'TaxDetails' => $this->getTaxDetails(),
+			'Rate' => $this->getRate(),
+			'Tax' => $this->getTax(),
+			'TaxDetails' => $this->getTaxDetails(),
 			'ResultCode' => $this->getResultCode(),
 			'Messages' => $this->getMessages()
 		];
@@ -61,43 +60,43 @@ class EstimateTaxResult extends BaseResult implements JsonSerializable
  * Method returning array of matching {@link ValidAddress}'s.
  * @return array
  */
-    public function getRate() { return $this->Rate; }
-    public function getTax() { return $this->Tax; }	
-    public function getTaxDetails() { return $this->TaxDetails; }	
+		public function getRate() { return $this->Rate; }
+		public function getTax() { return $this->Tax; }
+		public function getTaxDetails() { return $this->TaxDetails; }
 	
 	
 	
 	/**
  * @var string
  */
-    //private $TransactionId;
+		//private $TransactionId;
 /**
  * @var string must be one of the values defined in {@link SeverityLevel}.
  */
-    private $ResultCode = 'Success';
+		private $ResultCode = 'Success';
 /**
  * @var array of Message.
  */
-    private $Messages = array();
+		private $Messages = array();
 
 /**
  * Accessor
  * @return string
  */
-    //public function getTransactionId() { return $this->TransactionId; }
+		//public function getTransactionId() { return $this->TransactionId; }
 /**
  * Accessor
  * @return string
  */
-    public function getResultCode() { return $this->ResultCode; }
+		public function getResultCode() { return $this->ResultCode; }
 /**
  * Accessor
  * @return array
  */
-    public function getMessages() { return $this->Messages; }
-    
-    //@author:swetal
-    
+		public function getMessages() { return $this->Messages; }
+
+		//@author:swetal
+
 
 }
 

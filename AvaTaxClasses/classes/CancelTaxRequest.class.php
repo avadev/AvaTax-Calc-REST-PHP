@@ -16,13 +16,13 @@
  * @see CancelTaxResult, DocumentType
  *
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
  */
 
 class CancelTaxRequest 
 {
-    public $CancelCode;   //CancelCode::$Unspecified or CancelCode::$PostFailed or CancelCode::$DocDeleted or CancelCode::$DocVoided
+	public $CancelCode;   //CancelCode::$Unspecified or CancelCode::$PostFailed or CancelCode::$DocDeleted or CancelCode::$DocVoided
 	public $DocCode;	//string
 	public $DocType;	//DocumentType::$SalesInvoice or DocumentType::$ReturnInvoice or DocumentType::$PurchaseInvoice
 	public $CompanyCode; //string
@@ -36,13 +36,13 @@ class CancelTaxRequest
 	}
 
 
-    public function getCancelCode() { return $this->CancelCode; }
+	public function getCancelCode() { return $this->CancelCode; }
 	public function getDocCode() { return $this->DocCode; }
 	public function getDocType() { return $this->DocType; }
 	public function getCompanyCode() { return $this->CompanyCode; }
 	public function getDocId() { return $this->DocId; }
 
-    public function setCancelCode($value) { CancelCode::Validate($value); $this->CancelCode = $value; return $this; }
+	public function setCancelCode($value) { CancelCode::Validate($value); $this->CancelCode = $value; return $this; }
 	public function setDocCode($value) { $this->DocCode = $value; }
 	public function setDocType($value) { $this->DocType = $value; }
 	public function setCompanyCode($value) { $this->CompanyCode = $value; }

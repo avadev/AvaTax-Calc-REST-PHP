@@ -7,7 +7,7 @@
  * Contains Tax line data; Returned from {@link TaxServiceRest#getTax} as part of GetTaxResult;
  * 
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
  */
 
@@ -27,16 +27,16 @@ class TaxLine implements JsonSerializable
 	private $TaxDetails; //ArrayOfTaxDetail
 	
 	public function __construct($LineNo, 
-					$TaxCode, 
-					$Taxability,
-					$BoundaryLevel, 
-					$Exemption,
-					$Discount, 
-					$Taxable, 
-					$Rate,
-					$Tax, 
-					$TaxCalculated, 
-					$TaxDetails)
+		$TaxCode,
+		$Taxability,
+		$BoundaryLevel,
+		$Exemption,
+		$Discount,
+		$Taxable,
+		$Rate,
+		$Tax,
+		$TaxCalculated,
+		$TaxDetails)
 	{
 		$this->LineNo = $LineNo ; 
 		$this->TaxCode = $TaxCode ; 
@@ -52,7 +52,7 @@ class TaxLine implements JsonSerializable
 	
 	}
 
-    //Helper function to decode result objects from Json responses to specific objects.	
+		//Helper function to decode result objects from Json responses to specific objects.
 	public static function parseTaxLines($jsonString)
 	{
 		$object = json_decode($jsonString);
@@ -77,28 +77,27 @@ class TaxLine implements JsonSerializable
 					$line->TaxCalculated, 
 					$taxdetails
 				);
-
 		}
 
 		return $lineArray;
 	}
 	public function jsonSerialize(){
 		return[
-		    'TaxDetails' => $this->getTaxDetails(),	
-			'LineNo' => $this->getLineNo(), 
+			'TaxDetails' => $this->getTaxDetails(),
+			'LineNo' => $this->getLineNo(),
 			'TaxCode' => $this->getTaxCode(),
 			'Taxability' => $this->getTaxability(),
-			'BoundaryLevel' => $this->getBoundaryLevel(), 
-			'Exemption' => $this->getExemption(), 
-			'Discount' => $this->getDiscount(), 
-			'Taxable' => $this->getTaxable(), 
-			'Rate' => $this->getRate(),  
-			'Tax' => $this->getTax(), 
+			'BoundaryLevel' => $this->getBoundaryLevel(),
+			'Exemption' => $this->getExemption(),
+			'Discount' => $this->getDiscount(),
+			'Taxable' => $this->getTaxable(),
+			'Rate' => $this->getRate(),
+			'Tax' => $this->getTax(),
 			'TaxCalculated' => $this->getTaxCalculated()
 		];
 	}
 	
-    public function getTaxDetails() { return $this->TaxDetails; }	
+	public function getTaxDetails() { return $this->TaxDetails; }
 	public function getLineNo() { return $this->LineNo;} 
 	public function getTaxCode() { return $this->TaxCode;}
 	public function getTaxability() { return $this->Taxability;}
@@ -121,11 +120,11 @@ class TaxLine implements JsonSerializable
 	public function setRate($value) { $this->Rate = $value; }  
 	public function setTax($value) { $this->Tax = $value; } 
 	public function setTaxCalculated($value) { $this->TaxCalculated = $value; }
-    
-    //Helper functions for a transition from SOAP
+
+		//Helper functions for a transition from SOAP
 	public function getNo() { return $this->LineNo;}	
 	public function setNo($value) { $this->LineNo= $value;} 
-    
+
 
 }
 ?>
