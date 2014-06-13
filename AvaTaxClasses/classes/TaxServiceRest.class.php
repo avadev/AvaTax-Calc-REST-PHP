@@ -14,44 +14,43 @@
  * </pre>
  *
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
  * 
  */
 
 class TaxServiceRest
 {
-    static protected $classmap = array(
-        'Address' => 'Address',
-        'ValidAddress' => 'ValidAddress',
-        'Message' => 'Message',
-        'ValidateRequest' => 'ValidateRequest',
-        'ValidateResult' => 'ValidateResult',
+	static protected $classmap = array(
+		'Address' => 'Address',
+		'ValidAddress' => 'ValidAddress',
+		'Message' => 'Message',
+		'ValidateRequest' => 'ValidateRequest',
+		'ValidateResult' => 'ValidateResult',
 		'Line'=>'Line',
 		'CancelTaxRequest'=>'CancelTaxRequest',
 		'CancelTaxResult'=>'CancelTaxResult',
 		'GetTaxRequest'=>'GetTaxRequest',
 		'GetTaxResult'=>'GetTaxResult',
 		'TaxLine'=>'TaxLine',
-        'TaxDetail' => 'TaxDetail',
+		'TaxDetail' => 'TaxDetail',
 		'BaseResult'=>'BaseResult',
-		'TaxOverride'=>'TaxOverride'			
-		);
+		'TaxOverride'=>'TaxOverride'
+	);
 	protected $config = array();
-        
-    public function __construct($url, $account, $license)
-    {
-        $this->config = array(
-    		'url' => $url,
-            'account' => $account,         
-            'license' => $license);   
-    		                            
-    } 
+
+	public function __construct($url, $account, $license)
+	{
+		$this->config = array(
+		'url' => $url,
+		'account' => $account,
+		'license' => $license);
+	}
 
 	//Voids a document that has already been recorded on the Admin Console.
-    public function cancelTax(&$cancelTaxRequest)
-    {
-    	if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
+	public function cancelTax(&$cancelTaxRequest)
+	{
+		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
 		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
 		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
 		
@@ -62,22 +61,21 @@ class TaxServiceRest
 		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //Some Windows users have had trouble with our SSL Certificates. Uncomment this line to NOT use SSL.
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($cancelTaxRequest)); 
-        $curl_response = curl_exec($curl);
-        curl_close($curl);
-        return CancelTaxResult::parseResult($curl_response);
-    }
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($cancelTaxRequest));
+		$curl_response = curl_exec($curl);
+		curl_close($curl);
+		return CancelTaxResult::parseResult($curl_response);
+	}
 
 	//Calculates tax on a document and/or records that document to the Admin Console.
 	public function getTax(&$getTaxRequest)
-    {
-    	if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
+		{
+		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
 		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
 		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
-    	
+
 		$url = $this->config['url']."/1.0/tax/get";
-		
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
@@ -92,16 +90,15 @@ class TaxServiceRest
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
 
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest)); 
-        $curl_response = curl_exec($curl);
-        
-        curl_close($curl);
-        
-        return GetTaxResult::parseResult($curl_response);
-		
-		
-    }
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest));
+		$curl_response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return GetTaxResult::parseResult($curl_response);
+
+		}
 
 	//Estimates a composite tax based on latitude/longitude and total sale amount.
 	public function estimateTax(&$estimateTaxRequest)
@@ -111,7 +108,7 @@ class TaxServiceRest
 		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
 
 		$url =  $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
-    	$curl = curl_init();
+		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
 		curl_setopt($curl, CURLOPT_URL, $url);

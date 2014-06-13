@@ -9,13 +9,12 @@
  * @see GetTaxRequest
  * 
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax 
  */
 
 class GetTaxResult implements JsonSerializable// extends BaseResult
 {
-  	  
 	private $DocCode;	//string  
 	private $DocDate;			//date  		 	
 	private $Timestamp;		//dateTime  	
