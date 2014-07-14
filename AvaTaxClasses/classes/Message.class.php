@@ -62,13 +62,13 @@ class Message implements JsonSerializable
 
 	}
 	public function jsonSerialize(){
-		return[
+		return array(
 			'Summary' => $this->getSummary(),
 			'Details' => $this->getDetails(),
 			'RefersTo' => $this->getRefersTo(),
 			'Severity' => $this->getSeverity(),
 			'Source' => $this->getSource(),
-		];
+		);
 	}
 
 	public function getSummary() { return $this->Summary; }

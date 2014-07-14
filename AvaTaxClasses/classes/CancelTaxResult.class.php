@@ -50,12 +50,12 @@ class CancelTaxResult implements JsonSerializable
 	}
 
 	public function jsonSerialize(){
-		return [
+		return array(
 			'DocId' => $this->getDocId(),
 			'TransactionId' => $this->getTransactionId(),
 			'ResultCode' => $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
 	public function getDocId() { return $this->DocId; }

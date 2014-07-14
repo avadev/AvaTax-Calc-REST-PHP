@@ -79,7 +79,7 @@ class TaxDetail implements JsonSerializable
 			return $detailArray;
 		}
 	public function jsonSerialize(){
-		return[
+		return array(
 		 'JurisType' => $this->getJurisType(),
 		 'Taxable' => $this->getTaxable(),
 		 'Rate' => $this->getRate(),
@@ -88,7 +88,7 @@ class TaxDetail implements JsonSerializable
 		 'TaxName' => $this->getTaxName(),
 		 'Country' => $this->getCountry(),
 		 'Region' => $this->getRegion()
-		];
+		);
 	}
 
 	 public function getJurisType(){ return $this->JurisType; } 

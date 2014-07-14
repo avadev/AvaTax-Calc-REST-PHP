@@ -16,11 +16,11 @@ class BaseResult implements JsonSerializable
 {
 
 	public function jsonSerialize(){
-		return [
+		return array(
 			'TransactionId' => $this->getTransactionId(),
 			'ResultCode' => $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
 /**
