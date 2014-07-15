@@ -88,11 +88,11 @@ class ValidAddress
 	public function setRegion($value) { $this->Region = $value; }
 	public function setPostalCode($value) { $this->PostalCode = $value;  }
 	public function setCountry($value) { $this->Country = $value; }
-	public function setcounty($value) { $this->County = $value; }
-	public function setfipsCode($value) { $this->FipsCode = $value; }
-	public function setpostNet($value) { $this->PostNet = $value; }
-	public function setcarrierRoute($value) { $this->CarrierRoute = $value; }
-	public function setaddressType($value) { $this->AddressType = $value; }
+	public function setCounty($value) { $this->County = $value; }
+	public function setFipsCode($value) { $this->FipsCode = $value; }
+	public function setPostNet($value) { $this->PostNet = $value; }
+	public function setCarrierRoute($value) { $this->CarrierRoute = $value; }
+	public function setAddressType($value) { $this->AddressType = $value; }
 
 
 	public function getLine1() { return $this->Line1; }
@@ -101,12 +101,12 @@ class ValidAddress
 	public function getCity() { return $this->City; }
 	public function getRegion() { return $this->Region; }
 	public function getPostalCode() { return $this->PostalCode; }
-	public function getCountry() { return $this->AddressCode; }
-	public function getcounty() { return $this->County; }
-	public function getfipsCode() { return $this->FipsCode; }
-	public function getpostNet() { return $this->PostNet; }
-	public function getcarrierRoute() { return $this->CarrierRoute; }
-	public function getaddressType() { return $this->AddressType; }
+        public function getCountry() { return $this->Country; }
+        public function getCounty() { return $this->County; }
+	public function getFipsCode() { return $this->FipsCode; }
+	public function getPostNet() { return $this->PostNet; }
+	public function getCarrierRoute() { return $this->CarrierRoute; }
+	public function getAddressType() { return $this->AddressType; }
 
 
 	/**
