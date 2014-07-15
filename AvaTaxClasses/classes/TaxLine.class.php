@@ -82,7 +82,7 @@ class TaxLine implements JsonSerializable
 		return $lineArray;
 	}
 	public function jsonSerialize(){
-		return[
+		return array(
 			'TaxDetails' => $this->getTaxDetails(),
 			'LineNo' => $this->getLineNo(),
 			'TaxCode' => $this->getTaxCode(),
@@ -94,7 +94,7 @@ class TaxLine implements JsonSerializable
 			'Rate' => $this->getRate(),
 			'Tax' => $this->getTax(),
 			'TaxCalculated' => $this->getTaxCalculated()
-		];
+		);
 	}
 	
 	public function getTaxDetails() { return $this->TaxDetails; }

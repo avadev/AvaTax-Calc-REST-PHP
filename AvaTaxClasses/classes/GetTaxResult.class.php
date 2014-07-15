@@ -99,7 +99,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 	}
 
 	public function jsonSerialize(){
-		return[
+		return array(
 			'DocCode' =>  $this->getDocCode(), 
 			'DocDate' =>  $this->getDocDate(),			 				
 			'Timestamp' =>  $this->getTimestamp(),			
@@ -115,7 +115,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 			'TaxAddresses' =>  $this->getTaxAddresses(),
 			'ResultCode'=> $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
 	public function getDocCode() { return $this->DocCode; } 

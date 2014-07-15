@@ -65,11 +65,11 @@ class ValidateResult extends BaseResult implements JsonSerializable
 		return new self( $resultcode , $validaddress , $messages );	
 	}
 	public function jsonSerialize(){
-		return[
+		return array(
 			'ValidAddress' => $this->getValidAddress(),
 			'ResultCode' => $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
 	public function getValidAddress() { return $this->ValidAddress; }

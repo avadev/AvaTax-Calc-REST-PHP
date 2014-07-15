@@ -26,7 +26,8 @@ Contents:
 
 Dependencies:
 -----------
-- PHP 5.0 or later
+- PHP 5.3 or later
+- Not tested on versions older than PHP 5.3
 
 Requirements:
 ----------
