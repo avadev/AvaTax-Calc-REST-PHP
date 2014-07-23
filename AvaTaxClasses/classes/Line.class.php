@@ -27,6 +27,7 @@ class Line
 	public $Ref1;                //string
 	public $Ref2;                //string
 	public $TaxIncluded;		//boolean
+	public $TaxOverride;		//TaxOverride
 
 
 	public function __construct($no=1,$qty=1,$amount=100.00)
@@ -48,7 +49,8 @@ class Line
 	public function getDiscounted() {  return $this->Discounted;}
 	public function getRef1() {  return $this->Ref1;}
 	public function getRef2() {  return $this->Ref2;}
-	public function getTaxIncluded() {  return $this->TaxIncluded;}		
+	public function getTaxIncluded() {  return $this->TaxIncluded;}	
+	public function getTaxOverride() {return $this->TaxOverride;}	
 	
 	public function setLineNo($value) { $this->LineNo= $value;}
 	public function setOriginCode($value) { $this->OriginCode= $value;}
@@ -62,6 +64,7 @@ class Line
 	public function setRef1($value) { $this->Ref1= $value;}
 	public function setRef2($value) { $this->Ref2= $value;}
 	public function setTaxIncluded($value) { $this->TaxIncluded= $value;}
+	public function setTaxOverride($value) { $this->TaxOverride = $value; }		//TaxOverride
 	
 	//Helper functions for a transition from SOAP
 	public function getNo() { return $this->LineNo;}	

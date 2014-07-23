@@ -28,10 +28,10 @@ $getTaxRequest->setDocType(DocumentType::$SalesInvoice);
 // $getTaxRequest->setExemptionNo("12345");
 // $getTaxRequest->setDiscount(50);
 // $taxOverride = new TaxOverride();
-// $taxOverride.TaxOverrideType("TaxDate");
-// $taxOverride.Reason("Adjustment for return");
-// $taxOverride.TaxDate("2013-07-01");
-// $taxOverride.TaxAmount("0");
+// $taxOverride->setTaxOverrideType("TaxDate");
+// $taxOverride->setReason("Adjustment for return");
+// $taxOverride->setTaxDate("2013-07-01");
+// $taxOverride->setTaxAmount("0");
 // $getTaxRequest->setTaxOverride($taxOverride);
 
 // Optional Request Parameters
@@ -92,10 +92,10 @@ $line1->setTaxCode("NT");
 // $line1->setDiscounted(TRUE);
 // $line1->setTaxIncluded(TRUE);
 // $lineTaxOverride = new TaxOverride();
-// $lineTaxOverride.TaxOverrideType("TaxDate");
-// $lineTaxOverride.Reason("Adjustment for return");
-// $lineTaxOverride.TaxDate("2013-07-01");
-// $lineTaxOverride.TaxAmount("0");
+// $lineTaxOverride->setTaxOverrideType("TaxDate");
+// $lineTaxOverride->setReason("Adjustment for return");
+// $lineTaxOverride->setTaxDate("2013-07-01");
+// $lineTaxOverride->setTaxAmount("0");
 // $line1->setTaxOverride($lineTaxOverride);
 
 // Optional Request Parameters
