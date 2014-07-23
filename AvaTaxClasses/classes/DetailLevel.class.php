@@ -8,36 +8,36 @@
  * @see GetTaxRequest
  *
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
  */
 
 
 class DetailLevel extends Enum
 {
-   /**
-     * Tax jurisdiction breakout as an array of TaxDetail at the document level.
-     */
+	 /**
+		 * Tax jurisdiction breakout as an array of TaxDetail at the document level.
+		 */
 	public static $Summary		= 'Summary';
 	
 	/**
-     *  Document ({@link GetTaxResult}) level details; {@link ArrayOfTaxLine} will not be returned.
-     */
-    public static $Document		= 'Document';
+		 *  Document ({@link GetTaxResult}) level details; {@link ArrayOfTaxLine} will not be returned.
+		 */
+		public static $Document		= 'Document';
 	
 	/**
-     *  Line level details (includes Document details). {@link ArrayOfTaxLine} will
-     * be returned but {@link ArrayOfTaxDetail} will not be returned.
-     */     
-    public static $Line			= 'Line';
+		 *  Line level details (includes Document details). {@link ArrayOfTaxLine} will
+		 * be returned but {@link ArrayOfTaxDetail} will not be returned.
+		 */
+		public static $Line			= 'Line';
 	
 	/**
-     *  Tax jurisdiction level details (includes Document, {@link ArrayOfTaxLine},
-     * and {@link ArrayOfTaxDetail})
-     */
-    public static $Tax			= 'Tax';
+		 *  Tax jurisdiction level details (includes Document, {@link ArrayOfTaxLine},
+		 * and {@link ArrayOfTaxDetail})
+		 */
+		public static $Tax			= 'Tax';
 
-    
+
 	public static function Values()
 	{
 		return array(
@@ -48,8 +48,8 @@ class DetailLevel extends Enum
 		);
 	}
 	
-    // Unfortunate boiler plate due to polymorphism issues on static functions
-    public static function Validate($value) { self::__Validate($value,self::Values(),__CLASS__); }
+		// Unfortunate boiler plate due to polymorphism issues on static functions
+		public static function Validate($value) { self::__Validate($value,self::Values(),__CLASS__); }
 }
 
 ?>

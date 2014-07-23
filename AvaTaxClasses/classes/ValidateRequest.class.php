@@ -22,21 +22,21 @@
  * ValidateResult result = svc.validate(validateRequest);
  *
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
  
 class ValidateRequest
 {
-    private $Address; //The address to validate    
-    public function __construct($address = null)
-    {
-        $this->setAddress($address);
-    }
-    
-    public function setAddress(&$value) { $this->Address = $value; return $this; }
-   
-    public function getAddress() { return $this->Address; }
+	private $Address; //The address to validate
+	public function __construct($address = null)
+	{
+		$this->setAddress($address);
+	}
+
+	public function setAddress(&$value) { $this->Address = $value; return $this; }
+
+	public function getAddress() { return $this->Address; }
 
 	
 }

@@ -9,13 +9,12 @@
  * @see GetTaxRequest
  * 
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax 
  */
 
 class GetTaxResult implements JsonSerializable// extends BaseResult
 {
-  	  
 	private $DocCode;	//string  
 	private $DocDate;			//date  		 	
 	private $Timestamp;		//dateTime  	
@@ -100,7 +99,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 	}
 
 	public function jsonSerialize(){
-		return[
+		return array(
 			'DocCode' =>  $this->getDocCode(), 
 			'DocDate' =>  $this->getDocDate(),			 				
 			'Timestamp' =>  $this->getTimestamp(),			
@@ -116,7 +115,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 			'TaxAddresses' =>  $this->getTaxAddresses(),
 			'ResultCode'=> $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
 	public function getDocCode() { return $this->DocCode; } 

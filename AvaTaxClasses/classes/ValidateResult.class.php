@@ -25,7 +25,7 @@
  * @see ValidAddress
  * 
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
 
@@ -36,10 +36,10 @@ class ValidateResult extends BaseResult implements JsonSerializable
  * Array of matching {@link ValidAddress}'s.
  * @var array
  */
-    private $ValidAddress;
-    private $ResultCode = 'Success';
-    private $Messages = array();
-    
+	private $ValidAddress;
+	private $ResultCode = 'Success';
+	private $Messages = array();
+
 	public function __construct($resultCode , $validaddress , $messages)
 	{
 		$this->ResultCode = $resultCode;
@@ -48,7 +48,7 @@ class ValidateResult extends BaseResult implements JsonSerializable
 	}
 	
 	
-    //Helper function to decode result objects from Json responses to specific objects.		
+		//Helper function to decode result objects from Json responses to specific objects.
 	public static function parseResult($jsonString)
 	{
 		$object = json_decode($jsonString);
@@ -65,16 +65,16 @@ class ValidateResult extends BaseResult implements JsonSerializable
 		return new self( $resultcode , $validaddress , $messages );	
 	}
 	public function jsonSerialize(){
-		return[
+		return array(
 			'ValidAddress' => $this->getValidAddress(),
 			'ResultCode' => $this->getResultCode(),
 			'Messages' => $this->getMessages()
-		];
+		);
 	}
 
-    public function getValidAddress() { return $this->ValidAddress; }
-    public function getResultCode() { return $this->ResultCode; }
-    public function getMessages() { return $this->Messages; }
+	public function getValidAddress() { return $this->ValidAddress; }
+	public function getResultCode() { return $this->ResultCode; }
+	public function getMessages() { return $this->Messages; }
 
 }
 

@@ -25,42 +25,43 @@
  *
  * </pre>
  * @author    Avalara
- * @copyright © 2004 - 2011 Avalara, Inc.  All rights reserved.
+ * @copyright ï¿½ 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
  
 class Address
 {
 
-    public $AddressCode;
+	public $AddressCode;
 	public $Line1;
 	public $Line2;
 	public $Line3;
 	public $City;
 	public $Region;
 	public $PostalCode;
-    public $Country = 'US';
-    public $TaxRegionId;
-    public $Latitude;
-    public $Longitude;
+	public $Country = 'US';
+	public $TaxRegionId;
+	public $Latitude;
+	public $Longitude;
 
-    public function __construct($addressCode=null, $line1=null,$line2=null, $line3=null,$city=null,$region=null,$postalCode=null, $country='US', $taxRegionId=null, $latitude=null, $longitude=null)
-    {
-    	$this->AddressCode = $addressCode;
+	public function __construct($addressCode=null, $line1=null,$line2=null, $line3=null,$city=null,$region=null,$postalCode=null, $country='US', $taxRegionId=null, $latitude=null, $longitude=null)
+	{
+		$this->AddressCode = $addressCode;
 		$this->Line1 = $line1;
-        $this->Line2 = $line2;
-        $this->Line3 = $line3;
-        $this->City = $city;
-        $this->Region = $region;
-        $this->PostalCode = $postalCode;
-        $this->Country = $country;
-        $this->TaxRegionId = $taxRegionId;
-        $this->Latitude = $latitude;
-        $this->Longitude = $longitude;
-    }
-    public static function parseAddress($jsonString)
-    {
-    	$object = json_decode($jsonString);
+		$this->Line2 = $line2;
+		$this->Line3 = $line3;
+		$this->City = $city;
+		$this->Region = $region;
+		$this->PostalCode = $postalCode;
+		$this->Country = $country;
+		$this->TaxRegionId = $taxRegionId;
+		$this->Latitude = $latitude;
+		$this->Longitude = $longitude;
+	}
+
+	public static function parseAddress($jsonString)
+	{
+		$object = json_decode($jsonString);
 		$AddressCode = null;
 		$Line1 = null;
 		$Line2 = null;
@@ -72,7 +73,7 @@ class Address
 		$TaxRegionId = null;
 		$Latitude = null;
 		$Longitude = null;
-		
+
 		if (property_exists($object,"AddressCode")) $AddressCode = $object->AddressCode;
 		if (property_exists($object,"Line1"))	$Line1 = $object->Line1;
 		if (property_exists($object,"Line2"))	$Line2 = $object->Line2;
@@ -84,46 +85,46 @@ class Address
 		if (property_exists($object,"TaxRegionId"))	$TaxRegionId = $object->TaxRegionId;
 		if (property_exists($object,"Latitude"))	$Latitude = $object->Latitude;
 		if (property_exists($object,"Longitude"))	$Longitude = $object->Longitude;
-    		
-    	return new self(
-			$AddressCode,
-			$Line1,
-			$Line2,
-			$Line3,
-			$City,
-			$Region,
-			$PostalCode,
-			$Country,
-			$TaxRegionId,
-			$Latitude,
-			$Longitude);
-    		
-    	
-    }
 
-    public function setLatitude($value) { $this->Latitude = $value; }
-    public function setLongitude($value) { $this->Longitude = $value; }    	 
-    public function setAddressCode($value) { $this->AddressCode = $value; }
-    public function setLine1($value) { $this->Line1 = $value; }
-    public function setLine2($value) { $this->Line2 = $value; }
-    public function setLine3($value) { $this->Line3 = $value;  }
-    public function setCity($value) { $this->City = $value; }
-    public function setRegion($value) { $this->Region = $value; }
-    public function setPostalCode($value) { $this->PostalCode = $value;  }
-    public function setCountry($value) { $this->Country = $value; }
-    public function setTaxRegionId($value) { $this->TaxRegionId = $value;  }
-    
-    public function getLongitude() { return $this->Longitude; }
-    public function getLatitude() { return $this->Latitude; }
-    public function getAddressCode() { return $this->AddressCode; }
-    public function getLine1() { return $this->Line1; }
-    public function getLine2() { return $this->Line2; }
-    public function getLine3() { return $this->Line3; }
-    public function getCity() { return $this->City; }
-    public function getRegion() { return $this->Region; }
-    public function getPostalCode() { return $this->PostalCode; }
-    public function getCountry() { return $this->AddressCode; }
-    public function getTaxRegionId() { return $this->TaxRegionId; }
+		return new self(
+		$AddressCode,
+		$Line1,
+		$Line2,
+		$Line3,
+		$City,
+		$Region,
+		$PostalCode,
+		$Country,
+		$TaxRegionId,
+		$Latitude,
+		$Longitude);
+
+
+	}
+
+	public function setLatitude($value) { $this->Latitude = $value; }
+	public function setLongitude($value) { $this->Longitude = $value; }
+	public function setAddressCode($value) { $this->AddressCode = $value; }
+	public function setLine1($value) { $this->Line1 = $value; }
+	public function setLine2($value) { $this->Line2 = $value; }
+	public function setLine3($value) { $this->Line3 = $value;  }
+	public function setCity($value) { $this->City = $value; }
+	public function setRegion($value) { $this->Region = $value; }
+	public function setPostalCode($value) { $this->PostalCode = $value;  }
+	public function setCountry($value) { $this->Country = $value; }
+	public function setTaxRegionId($value) { $this->TaxRegionId = $value;  }
+
+	public function getLongitude() { return $this->Longitude; }
+	public function getLatitude() { return $this->Latitude; }
+	public function getAddressCode() { return $this->AddressCode; }
+	public function getLine1() { return $this->Line1; }
+	public function getLine2() { return $this->Line2; }
+	public function getLine3() { return $this->Line3; }
+	public function getCity() { return $this->City; }
+	public function getRegion() { return $this->Region; }
+	public function getPostalCode() { return $this->PostalCode; }
+	public function getCountry() { return $this->AddressCode; }
+	public function getTaxRegionId() { return $this->TaxRegionId; }
 
 
 	/**
