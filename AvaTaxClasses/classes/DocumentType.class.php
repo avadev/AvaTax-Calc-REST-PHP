@@ -58,6 +58,16 @@ class DocumentType extends Enum
 	 */
     public static $ReturnInvoice	= 'ReturnInvoice';
     
+    public static $ReverseChargeOrder	= 'ReverseChargeOrder';
+
+    public static $ReverseChargeInvoice	= 'ReverseChargeInvoice';
+
+    /**
+	 * This will return all types of documents.
+	 *
+	 * @var DocumentType
+	 */
+    
     /**
 	 * This will return all types of documents.
 	 *
@@ -73,7 +83,9 @@ class DocumentType extends Enum
 			DocumentType::$PurchaseOrder,
 			DocumentType::$PurchaseInvoice,
 			DocumentType::$ReturnOrder,
-			DocumentType::$ReturnInvoice,	
+			DocumentType::$ReturnInvoice,
+            DocumentType::$ReverseChargeOrder,
+            DocumentType::$ReverseChargeInvoice,	
 			DocumentType::$Any	
 		);
 	}
