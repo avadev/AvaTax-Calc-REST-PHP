@@ -1,12 +1,10 @@
 {
-    "name": "avatax-sample",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/anyarms/AvaTax-Calc-REST-PHP"
-        }
-    ],
+    "name": "avalara/avatax",
+    "description": "A set of classes to assist with integration to the Avalara AvaTax REST API.",
+    "autoload": {
+        "psr-0": {"Avalara\\": "src/"}
+    },
     "require": {
-        "avalara/avatax": "master"
+        "php": ">=5.3.0",
     }
 }
