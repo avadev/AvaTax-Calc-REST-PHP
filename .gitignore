@@ -163,5 +163,7 @@ pip-log.txt
 .DS_Store
 
 # Composer stuff
-composer.json
+Samples/composer.json
+Samples/vendor/
+Samples/composer.lock
 vendor/
