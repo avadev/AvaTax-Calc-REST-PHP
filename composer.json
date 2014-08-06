@@ -1,6 +1,6 @@
 {
     "name": "avalara/avatax",
-    "version": "14.4.2"
+    "version": "14.4.2",
     "description": "A set of classes to assist with integration to the Avalara AvaTax REST API.",
     "require": {
         "php": ">=5.3.0"
