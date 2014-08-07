@@ -8,7 +8,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "AvaTax": "src/"
+            "AvaTax\\": "src/"
         }
     }
 }
