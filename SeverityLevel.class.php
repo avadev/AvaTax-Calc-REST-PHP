@@ -1,4 +1,4 @@
-<?php
+<?php namespace AvaTax;
 /**
  * SeverityLevel.class.php
  */
