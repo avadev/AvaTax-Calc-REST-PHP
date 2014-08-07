@@ -1,4 +1,4 @@
-<?php namespace AvaTax;
+<?php
 /**
  * TaxServiceRest.class.php
  */
