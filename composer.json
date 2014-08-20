@@ -5,10 +5,6 @@
     "require": {
         "php": ">=5.3.0"
     },
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "AvaTax\\": "AvaTaxClasses/"
-        }
+    "minimum-stability": "dev"
     }
 }
