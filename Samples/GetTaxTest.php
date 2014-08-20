@@ -1,5 +1,5 @@
 <?php
-require('AvaTaxClasses/AvaTax.php');
+require('../AvaTaxClasses/AvaTax.php');
 include 'configuration.php';
 
 // Header Level Elements
