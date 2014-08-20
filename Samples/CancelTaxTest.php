@@ -1,11 +1,12 @@
 <?php
-require('AvaTaxClasses/AvaTax.php');
+require('../AvaTaxClasses/AvaTax.php');
+include 'configuration.php';
 
 // Header Level Elements
 // Required Header Level Elements
-$serviceURL = "https://development.avalara.net";
-$accountNumber = "1234567890";
-$licenseKey = "A1B2C3D4E5F6G7H8";
+$serviceURL = $configuration['serviceURL'];
+$accountNumber = $configuration['accountNumber'];
+$licenseKey = $configuration['licenseKey'];
 	
 $taxSvc = new TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
 $cancelTaxRequest = new CancelTaxRequest();

@@ -161,3 +161,9 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+# Composer stuff
+Samples/composer.json
+Samples/vendor/
+Samples/composer.lock
+vendor/
