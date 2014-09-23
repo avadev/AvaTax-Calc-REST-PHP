@@ -12,6 +12,7 @@
  * @package   Tax
  */
 
+namespace AvaTax;
 
 class DetailLevel extends Enum
 {

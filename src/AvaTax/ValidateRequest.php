@@ -25,7 +25,9 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
- 
+
+namespace AvaTax;
+
 class ValidateRequest
 {
 	private $Address; //The address to validate

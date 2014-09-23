@@ -13,6 +13,8 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  */
 
+namespace AvaTax;
+
 class Message implements JsonSerializable
 {
 	private $Summary;

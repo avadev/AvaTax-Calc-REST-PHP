@@ -26,7 +26,9 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
- 
+
+namespace AvaTax;
+
 class ValidAddress
 {
 

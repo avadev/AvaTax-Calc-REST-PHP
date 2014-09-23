@@ -13,6 +13,8 @@
  * 
  */
 
+namespace AvaTax;
+
 class CancelTaxResult implements JsonSerializable
 {
 
