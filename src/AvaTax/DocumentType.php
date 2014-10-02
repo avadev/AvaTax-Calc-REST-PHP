@@ -12,6 +12,7 @@
  * @package   Tax
  */
 
+namespace AvaTax;
 
 class DocumentType extends Enum
 {

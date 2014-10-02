@@ -13,7 +13,7 @@
  * @package   Tax
  */
  
- 
+namespace AvaTax;
 
 class GetTaxRequest 
 {
@@ -91,11 +91,11 @@ class GetTaxRequest
 	
 	public function getAddresses()
 	{
-		return is_array($this->Addresses) ? $this->Addresses : EnsureIsArray($this->Addresses->BaseAddress);	
+		return is_array($this->Addresses) ? $this->Addresses : AvaFunctions::EnsureIsArray($this->Addresses->BaseAddress);	
 	}				
 		public function getLines()
 		{
-		return is_array($this->Lines) ? $this->Lines : EnsureIsArray($this->Lines->Line);
+		return is_array($this->Lines) ? $this->Lines : AvaFunctions::EnsureIsArray($this->Lines->Line);
 		}
 
 	//Adding getLine function which returns line based on line number

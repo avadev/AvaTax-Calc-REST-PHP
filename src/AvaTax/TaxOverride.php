@@ -11,6 +11,8 @@
  * @package   Tax
  */
 
+namespace AvaTax;
+
 class TaxOverride
 {
 	public $TaxOverrideType;   //TaxOverrideType

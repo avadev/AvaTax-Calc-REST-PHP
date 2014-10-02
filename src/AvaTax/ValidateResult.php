@@ -29,6 +29,7 @@
  * @package   Address
  */
 
+namespace AvaTax;
 
 class ValidateResult extends BaseResult implements JsonSerializable
 {

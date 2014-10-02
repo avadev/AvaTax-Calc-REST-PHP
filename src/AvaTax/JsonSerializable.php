@@ -6,6 +6,8 @@
  * Time: 12:44 PM
  */
 
+namespace AvaTax;
+
 interface JsonSerializable {
 
 	public function jsonSerialize();

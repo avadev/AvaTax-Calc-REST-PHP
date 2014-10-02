@@ -10,7 +10,8 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Base
  */
- 
+
+namespace AvaTax;
 
 class BaseResult implements JsonSerializable
 {
@@ -37,7 +38,7 @@ class BaseResult implements JsonSerializable
  * Accessor
  * @return array
  */
-	public function getMessages() { return EnsureIsArray($this->Messages->Message); }
+	public function getMessages() { return AvaFunctions::EnsureIsArray($this->Messages->Message); }
 
 }
 

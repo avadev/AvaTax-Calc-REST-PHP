@@ -13,6 +13,8 @@
  * @package   Tax 
  */
 
+namespace AvaTax;
+
 class GetTaxResult implements JsonSerializable// extends BaseResult
 {
 	private $DocCode;	//string  

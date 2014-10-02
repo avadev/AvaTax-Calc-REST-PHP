@@ -4,6 +4,7 @@
  * EstimateTaxResult.class.php
  */
 
+namespace AvaTax;
 
 class EstimateTaxResult extends BaseResult implements JsonSerializable
 {

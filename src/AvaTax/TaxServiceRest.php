@@ -19,6 +19,8 @@
  * 
  */
 
+namespace AvaTax;
+
 class TaxServiceRest
 {
 	static protected $classmap = array(

@@ -20,6 +20,8 @@
  * 
  */
 
+namespace AvaTax;
+
 class AddressServiceRest 
 {
 	static protected $classmap = array(
