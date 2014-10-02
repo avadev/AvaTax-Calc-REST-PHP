@@ -1,4 +1,5 @@
 <?php
+namespace AvaTax;
 /**
  * CancelTaxResult.class.php
  */
@@ -12,8 +13,6 @@
  * @package   Tax
  * 
  */
-
-namespace AvaTax;
 
 class CancelTaxResult implements JsonSerializable
 {

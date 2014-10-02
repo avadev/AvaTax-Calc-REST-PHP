@@ -1,8 +1,8 @@
 <?php
 
 $configuration = Array();
-$configuration['accountNumber'] = "1234567890";
-$configuration['licenseKey'] = "A1B2C3D4E5F6G7H8";
+$configuration['accountNumber'] = "account.admin.1100014690";
+$configuration['licenseKey'] = "avalara";
 $configuration['serviceURL'] = "https://development.avalara.net";    
     
 ?>
