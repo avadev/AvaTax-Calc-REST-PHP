@@ -33,7 +33,7 @@ class Message implements JsonSerializable
 	}
 
 	//Helper function to decode result objects from Json responses to specific objects.
-	public function parseMessages($jsonString)
+	public static function parseMessages($jsonString)
 	{
 		$object = json_decode($jsonString);
 		$messageArray = array();
