@@ -53,7 +53,7 @@ class TaxDetail implements JsonSerializable
 
 
 	//Helper function to decode result objects from Json responses to specific objects.
-	public function parseTaxDetails($jsonString)
+	public static function parseTaxDetails($jsonString)
 	{
 		$object = json_decode($jsonString);
 		$detailArray = array();
