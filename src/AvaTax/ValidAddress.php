@@ -69,8 +69,8 @@ class ValidAddress
 		$object = json_decode($jsonString);
 		return new self(
 			$object->Line1,
-			$object->Line2,
-			$object->Line3,
+			isset($object->Line2) ? $object->Line2 : null,
+			isset($object->Line3) ? $object->Line3 : null,
 			$object->City,
 			$object->Region,
 			$object->PostalCode,
