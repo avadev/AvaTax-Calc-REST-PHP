@@ -125,7 +125,7 @@ class Address
 	public function getCity() { return $this->City; }
 	public function getRegion() { return $this->Region; }
 	public function getPostalCode() { return $this->PostalCode; }
-	public function getCountry() { return $this->AddressCode; }
+	public function getCountry() { return $this->Country; }
 	public function getTaxRegionId() { return $this->TaxRegionId; }
 
 
