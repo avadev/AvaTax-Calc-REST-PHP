@@ -26,6 +26,7 @@ $getTaxRequest->setDocType(AvaTax\DocumentType::$SalesInvoice);
 
 // Situational Request Parameters
 // $getTaxRequest->setCustomerUsageType("G");
+// $getTaxRequest->setBusinessIdentificationNo("234243");
 // $getTaxRequest->setExemptionNo("12345");
 // $getTaxRequest->setDiscount(50);
 // $taxOverride = new AvaTax\TaxOverride();
@@ -92,6 +93,7 @@ $line1->setTaxCode("NT");
 // $line1->setCustomerUsageType("L");
 // $line1->setDiscounted(TRUE);
 // $line1->setTaxIncluded(TRUE);
+// $line1->setBusinessIdentificationNo("234243");
 // $lineTaxOverride = new AvaTax\TaxOverride();
 // $lineTaxOverride->setTaxOverrideType("TaxDate");
 // $lineTaxOverride->setReason("Adjustment for return");
