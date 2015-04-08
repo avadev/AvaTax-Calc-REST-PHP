@@ -61,11 +61,11 @@ class TaxServiceRest
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
 		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-		// *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 	
-			
-		//Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines. If you choose to manually set the path, make sure you have commented out the line above 
+        // *This is not recommended, see below for better alternative*
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
+		
+        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
+		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
 		//    that tells curl to NOT use SSL.
 		//$ca = "C:/curl/curl-ca-bundle.crt";
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
@@ -91,11 +91,11 @@ class TaxServiceRest
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
 
 		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-		// *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 	
-
-		//Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines. If you choose to manually set the path, make sure you have commented out the line above 
+        // *This is not recommended, see below for better alternative*
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
+		
+        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
+		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
 		//    that tells curl to NOT use SSL.
 		//$ca = "C:/curl/curl-ca-bundle.crt";
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
@@ -126,11 +126,11 @@ class TaxServiceRest
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-		// *This is not recommended, see below for better alternative*
+        // *This is not recommended, see below for better alternative*
 		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
 		
-		//Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines. If you choose to manually set the path, make sure you have commented out the line above 
+        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
+		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
 		//    that tells curl to NOT use SSL.
 		//$ca = "C:/curl/curl-ca-bundle.crt";
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
