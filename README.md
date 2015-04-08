@@ -10,6 +10,8 @@ This is a PHP sample demonstrating the [AvaTax REST API](http://developer.avalar
 Dependencies:
 -----------
 - PHP 5.3 or later (not tested on versions older than PHP 5.3)
+- cURL has to be installed on the server before the HTTP REST Request can be made from PHP. Some PHP installations come with cURL, but others need to be installed manually. Try running curl --help from any command line on the server you have PHP installed to see if cURL is working. If cURL is not, you can manually install it from this URL : http://curl.haxx.se
+- A Root Certificate needs to be installed for cURL to work. You have to save the root CRT file into a folder on your server and configure cURL to use that exact certificate. Instructions for downloading it can be found here : http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates 
 
 Requirements:
 ----------
@@ -20,10 +22,11 @@ two workarounds (both in /AvaTaxClasses/classes/TaxServiceRest.php.class). If th
 for your system, uncomment ONE of the following two options in that file:
 
 		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
+        // *This is not recommended, see below for better alternative*
 		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
 		
-		//Other Windows users may prefer to download the certificate from our site (detail here: ) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines. If you choose to manually set the path, make sure you have commented out the line above 
+        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
+		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
 		//    that tells curl to NOT use SSL.
 		//$ca = "C:/curl/curl-ca-bundle.crt";
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
