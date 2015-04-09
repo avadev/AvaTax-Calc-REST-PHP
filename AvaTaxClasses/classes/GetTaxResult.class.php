@@ -86,7 +86,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 		if(property_exists($object, "TaxLines"))
 			$taxlines = TaxLine::parseTaxLines("{\"TaxLines\": ".json_encode($object->TaxLines)."}");
 		if(property_exists($object, "TaxSummary"))
-			$taxsummary = TaxDetail::parseTaxDetails("{\"TaxSummary\": ".json_encode($object->TaxSummary)."}");
+			$taxsummary = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxSummary)."}");
 		if(property_exists($object, "TaxAddresses"))
 			$taxaddresses = Address::parseAddress("{\"TaxAddresses\": ".json_encode($object->TaxAddresses)."}");	
 		if(property_exists($object, "Messages"))
