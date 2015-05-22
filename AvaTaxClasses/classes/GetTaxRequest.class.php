@@ -40,7 +40,7 @@ class GetTaxRequest
 
 	public function __construct()
 	{
-		date_default_timezone_set('UTC');
+		//date_default_timezone_set('UTC');
 		$this->DocDate = date("Y-m-d");
 		$this->Commit=false;
 		$this->DocType=DocumentType::$SalesOrder;
