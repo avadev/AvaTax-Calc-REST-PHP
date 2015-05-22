@@ -13,6 +13,8 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  */
 
+namespace AvaTax;
+
 class Message implements JsonSerializable
 {
 	private $Summary;
@@ -31,7 +33,7 @@ class Message implements JsonSerializable
 	}
 
 	//Helper function to decode result objects from Json responses to specific objects.
-	public function parseMessages($jsonString)
+	public static function parseMessages($jsonString)
 	{
 		$object = json_decode($jsonString);
 		$messageArray = array();

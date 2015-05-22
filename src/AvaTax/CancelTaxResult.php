@@ -1,4 +1,5 @@
 <?php
+namespace AvaTax;
 /**
  * CancelTaxResult.class.php
  */

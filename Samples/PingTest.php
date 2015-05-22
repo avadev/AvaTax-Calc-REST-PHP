@@ -1,5 +1,5 @@
 <?php
-require('../AvaTaxClasses/AvaTax.php');
+require 'vendor/autoload.php';
 include 'configuration.php';
 
 // Header Level Elements
@@ -8,11 +8,11 @@ $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
 
-$taxSvc = new TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
+$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
 	
 $geoTaxResult = $taxSvc->ping(""); 
 echo 'PingTest Result: ' . $geoTaxResult->getResultCode()."\n";
-if($geoTaxResult->getResultCode() != SeverityLevel::$Success)
+if($geoTaxResult->getResultCode() != AvaTax\SeverityLevel::$Success)
 {	
 	foreach($geoTaxResult->getMessages() as $message)
 	{

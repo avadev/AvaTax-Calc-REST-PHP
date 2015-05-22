@@ -20,6 +20,8 @@
  * @package   Tax
  */
 
+namespace AvaTax;
+
 class CancelTaxRequest 
 {
 	public $CancelCode;   //CancelCode::$Unspecified or CancelCode::$PostFailed or CancelCode::$DocDeleted or CancelCode::$DocVoided

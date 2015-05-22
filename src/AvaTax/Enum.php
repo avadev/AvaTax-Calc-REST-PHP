@@ -10,7 +10,9 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Base
  */
- 
+
+namespace AvaTax;
+
 class Enum
 {
 	// Basic implementation - check and throw

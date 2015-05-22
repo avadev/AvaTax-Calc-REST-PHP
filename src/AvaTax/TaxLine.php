@@ -11,6 +11,8 @@
  * @package   Tax
  */
 
+namespace AvaTax;
+
 class TaxLine implements JsonSerializable
 {
 

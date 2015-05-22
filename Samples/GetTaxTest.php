@@ -1,5 +1,5 @@
 <?php
-require('../AvaTaxClasses/AvaTax.php');
+require 'vendor/autoload.php';
 include 'configuration.php';
 
 // Header Level Elements
@@ -8,8 +8,8 @@ $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
 	
-$taxSvc = new TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
-$getTaxRequest = new GetTaxRequest();
+$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
+$getTaxRequest = new AvaTax\GetTaxRequest();
 
 // Document Level Elements
 // Required Request Parameters
@@ -20,16 +20,16 @@ $getTaxRequest->setDocDate("2014-01-01");
 $getTaxRequest->setCompanyCode("APITrialCompany");
 $getTaxRequest->setClient("AvaTaxSample");
 $getTaxRequest->setDocCode("INV001");
-$getTaxRequest->setDetailLevel(DetailLevel::$Tax);
+$getTaxRequest->setDetailLevel(AvaTax\DetailLevel::$Tax);
 $getTaxRequest->setCommit(FALSE);
-$getTaxRequest->setDocType(DocumentType::$SalesInvoice);
+$getTaxRequest->setDocType(AvaTax\DocumentType::$SalesInvoice);
 
 // Situational Request Parameters
 // $getTaxRequest->setCustomerUsageType("G");
 // $getTaxRequest->setBusinessIdentificationNo("234243");
 // $getTaxRequest->setExemptionNo("12345");
 // $getTaxRequest->setDiscount(50);
-// $taxOverride = new TaxOverride();
+// $taxOverride = new AvaTax\TaxOverride();
 // $taxOverride->setTaxOverrideType("TaxDate");
 // $taxOverride->setReason("Adjustment for return");
 // $taxOverride->setTaxDate("2013-07-01");
@@ -45,7 +45,7 @@ $getTaxRequest->setCurrencyCode("USD");
 // Address Data
 $addresses = array();
 
-$address1 = new Address();
+$address1 = new AvaTax\Address();
 $address1->setAddressCode("01");
 $address1->setLine1("45 Fremont Street");
 $address1->setCity("San Francisco");
@@ -53,7 +53,7 @@ $address1->setRegion("CA");
 
 $addresses[] = $address1;
 
-$address2 = new Address();
+$address2 = new AvaTax\Address();
 $address2->setAddressCode("02");
 $address2->setLine1("118 N Clark St");
 $address2->setLine2("Suite 100");
@@ -65,7 +65,7 @@ $address2->setPostalCode("60602");
 
 $addresses[] = $address2;
 
-$address3 = new Address();
+$address3 = new AvaTax\Address();
 $address3->setAddressCode("03");
 $address3->setLatitude(47.627935);
 $address3->setLongitude(-122.51702);
@@ -77,7 +77,7 @@ $getTaxRequest->setAddresses($addresses);
 // Required Parameters
 $lines = array();
 
-$line1 = new Line();
+$line1 = new AvaTax\Line();
 $line1->setLineNo("01");
 $line1->setItemCode("N543");
 $line1->setQty(1);
@@ -94,7 +94,8 @@ $line1->setTaxCode("NT");
 // $line1->setDiscounted(TRUE);
 // $line1->setTaxIncluded(TRUE);
 // $line1->setBusinessIdentificationNo("234243");
-// $lineTaxOverride = new TaxOverride();
+
+// $lineTaxOverride = new AvaTax\TaxOverride();
 // $lineTaxOverride->setTaxOverrideType("TaxDate");
 // $lineTaxOverride->setReason("Adjustment for return");
 // $lineTaxOverride->setTaxDate("2013-07-01");
@@ -107,7 +108,7 @@ $line1->setRef2("ref456");
 
 $lines[] = $line1;
 
-$line2 = new Line();
+$line2 = new AvaTax\Line();
 $line2->setLineNo("02");
 $line2->setItemCode("T345");
 $line2->setQty(3);
@@ -119,7 +120,7 @@ $line2->setTaxCode("PC030147");
 
 $lines[] = $line2;
 
-$line3 = new Line();
+$line3 = new AvaTax\Line();
 $line3->setLineNo("02-FR");
 $line3->setItemCode("FREIGHT");
 $line3->setQty(1);
@@ -136,7 +137,7 @@ $getTaxResult = $taxSvc->getTax($getTaxRequest);
 
 //Print Results
 echo 'GetTaxTest Result: ' . $getTaxResult->getResultCode() . "\n";
-if($getTaxResult->getResultCode() != SeverityLevel::$Success)	// call failed
+if($getTaxResult->getResultCode() != AvaTax\SeverityLevel::$Success)	// call failed
 {	
 	foreach($getTaxResult->getMessages() as $message)
 	{

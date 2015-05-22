@@ -28,6 +28,8 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
+
+namespace AvaTax;
  
 class Address
 {
@@ -123,7 +125,7 @@ class Address
 	public function getCity() { return $this->City; }
 	public function getRegion() { return $this->Region; }
 	public function getPostalCode() { return $this->PostalCode; }
-	public function getCountry() { return $this->AddressCode; }
+	public function getCountry() { return $this->Country; }
 	public function getTaxRegionId() { return $this->TaxRegionId; }
 
 

@@ -9,26 +9,28 @@
  * @see ArrayOfTaxDetail
  * @see TaxLine
  * @see GetTaxResult
- * 
+ *
  * @author    Avalara
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
  */
 
+namespace AvaTax;
+
 class TaxDetail implements JsonSerializable
 {
 
-	private $JurisType;     //JurisdictionType 	
-	private $Taxable;     //decimal 
-	private $Rate;		//decimal 	
-	private $Tax;		//decimal 
+	private $JurisType;     //JurisdictionType
+	private $Taxable;     //decimal
+	private $Rate;		//decimal
+	private $Tax;		//decimal
 	private $JurisName; 	//string
-	private $TaxName;     //string 
+	private $TaxName;     //string
 	private $Country;	//string
 	private $Region; 	//string
 
-	
-	
+
+
 	public function __construct(
 		$JurisType,
 		$Taxable,
@@ -51,7 +53,7 @@ class TaxDetail implements JsonSerializable
 
 
 	//Helper function to decode result objects from Json responses to specific objects.
-	public function parseTaxDetails($jsonString)
+	public static function parseTaxDetails($jsonString)
 	{
 		$object = json_decode($jsonString);
 		$detailArray = array();
@@ -69,7 +71,7 @@ class TaxDetail implements JsonSerializable
 		$detail->Rate,
 		$detail->Tax,
 		$detail->JurisName,
-		$detail->TaxName,
+		(isset($detail->TaxName)?$detail->TaxName:''),
 		$detail->Country,
 		$detail->Region
 		);
@@ -91,12 +93,12 @@ class TaxDetail implements JsonSerializable
 		);
 	}
 
-	 public function getJurisType(){ return $this->JurisType; } 
-	 public function getTaxable(){ return $this->Taxable; }   
-	 public function getRate(){ return $this->Rate; }	
+	 public function getJurisType(){ return $this->JurisType; }
+	 public function getTaxable(){ return $this->Taxable; }
+	 public function getRate(){ return $this->Rate; }
 	 public function getTax(){ return $this->Tax; }
-	 public function getJurisName(){ return $this->JurisName; }   
-	 public function getTaxName(){ return $this->TaxName; }    
+	 public function getJurisName(){ return $this->JurisName; }
+	 public function getTaxName(){ return $this->TaxName; }
 	 public function getCountry(){ return $this->Country; }
 	 public function getRegion(){ return $this->Region; }
 

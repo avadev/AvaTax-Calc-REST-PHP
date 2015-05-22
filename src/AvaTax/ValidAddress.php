@@ -26,7 +26,9 @@
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
  */
- 
+
+namespace AvaTax;
+
 class ValidAddress
 {
 
@@ -67,15 +69,15 @@ class ValidAddress
 		$object = json_decode($jsonString);
 		return new self(
 			$object->Line1,
-			$object->Line2,
-			$object->Line3,
+			isset($object->Line2) ? $object->Line2 : null,
+			isset($object->Line3) ? $object->Line3 : null,
 			$object->City,
 			$object->Region,
 			$object->PostalCode,
 			$object->Country,
-			$object->County,
+			isset($object->County) ? $object->County : null,
 			$object->FipsCode,
-			$object->CarrierRoute,
+			isset($object->CarrierRoute) ? $object->CarrierRoute : null,
 			$object->PostNet,
 			$object->AddressType);
 	}
