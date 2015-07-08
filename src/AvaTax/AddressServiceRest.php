@@ -21,6 +21,7 @@
  */
 
 namespace AvaTax;
+class Exception extends \Exception {}
 
 class AddressServiceRest 
 {
@@ -48,9 +49,9 @@ class AddressServiceRest
 		//Validates/normalizes a single provided address. Will either return a single, non-ambiguous validated address match or an error.
 	public function validate($validateRequest)
 	{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
+		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
+		if(empty($this->config['account']))		throw new \Exception("Account number or username is required.");
+		if(empty($this->config['license']))		throw new \Exception("License key or password is required.");
 
 		$url =  $this->config['url'].'/1.0/address/validate?'. http_build_query($validateRequest->getAddress());
 		$curl = curl_init();
