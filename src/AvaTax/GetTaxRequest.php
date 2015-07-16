@@ -40,11 +40,12 @@ class GetTaxRequest
 
 	public function __construct()
 	{
-		$this->DocDate = date("Y-m-d");
+		$date = \DateTime::createFromFormat('U.u', microtime(true));
+		$this->DocDate = $date->format('Y-m-d');
 		$this->Commit=false;
 		$this->DocType=DocumentType::$SalesOrder;
 		$this->DetailLevel=DetailLevel::$Tax;
-		$this->DocCode = date("Y-m-d-H-i-s.u");
+		$this->DocCode = $date->format('Y-m-d-H-i-s.u');
 		$this->CustomerCode='CustomerCodeString';
 		$this->Lines=array(new Line());							
 	}
