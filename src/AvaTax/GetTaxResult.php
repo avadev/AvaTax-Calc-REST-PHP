@@ -100,22 +100,11 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 		$taxdate, $taxlines, $taxsummary, $taxaddresses );	
 	}
 
+    /**
+     * @return array
+     */
 	public function jsonSerialize()
     {
-        $taxLines = array_map(
-            function ($line) {
-                return $line->jsonSerialize();
-            },
-            $this->getTaxLines()
-        );
-
-        $messages = array_map(
-            function ($line) {
-                return $line->jsonSerialize();
-            },
-            $this->getMessages()
-        );
-
 		return array(
 			'DocCode' =>  $this->getDocCode(), 
 			'DocDate' =>  $this->getDocDate(),			 				
@@ -126,14 +115,28 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 			'TotalTaxable' =>  $this->getTotalTaxable(),	 
 			'TotalTax' =>  $this->getTotalTax(),		  	
 			'TotalTaxCalculated' =>  $this->getTotalTaxCalculated(),		 
-			'TaxDate' =>  $this->getTaxDate(),		
-		 	'TaxLines' =>  $taxLines,
-			'TaxSummary' =>  $this->getTaxSummary(),		
+			'TaxDate' =>  $this->getTaxDate(),
+            'TaxLines' =>  $this->jsonSerializeArray($this->getTaxLines()),
+			'TaxSummary' =>  $this->getTaxSummary(),
 			'TaxAddresses' =>  $this->getTaxAddresses(),
 			'ResultCode'=> $this->getResultCode(),
-			'Messages' => $messages
+			'Messages' => $this->jsonSerializeArray($this->getMessages()),
 		);
 	}
+
+    /**
+     * @param array $items
+     * @return array
+     */
+    private function jsonSerializeArray(array $items)
+    {
+        return array_map(
+            function ($item) {
+                return $item->jsonSerialize();
+            },
+            $items
+        );
+    }
 
 	public function getDocCode() { return $this->DocCode; } 
 	public function getDocDate() { return $this->DocDate; }			 				
