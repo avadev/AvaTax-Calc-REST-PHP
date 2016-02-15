@@ -109,6 +109,13 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
             $this->getTaxLines()
         );
 
+        $messages = array_map(
+            function ($line) {
+                return $line->jsonSerialize();
+            },
+            $this->getMessages()
+        );
+
 		return array(
 			'DocCode' =>  $this->getDocCode(), 
 			'DocDate' =>  $this->getDocDate(),			 				
@@ -124,7 +131,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 			'TaxSummary' =>  $this->getTaxSummary(),		
 			'TaxAddresses' =>  $this->getTaxAddresses(),
 			'ResultCode'=> $this->getResultCode(),
-			'Messages' => $this->getMessages()
+			'Messages' => $messages
 		);
 	}
 
