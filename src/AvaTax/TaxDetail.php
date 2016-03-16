@@ -57,8 +57,9 @@ class TaxDetail implements JsonSerializable
 	{
 		$object = json_decode($jsonString);
 		$detailArray = array();
+		$details = isset($object->TaxDetails) ? $object->TaxDetails : $object->TaxSummary;
 
-		foreach($object->TaxDetails as $detail)
+		foreach($details as $detail)
 		{
 		$taxable = 0;
 		if ($detail->Rate != 0) {
