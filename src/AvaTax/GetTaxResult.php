@@ -117,7 +117,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 			'TotalTaxCalculated' =>  $this->getTotalTaxCalculated(),		 
 			'TaxDate' =>  $this->getTaxDate(),
             'TaxLines' =>  $this->jsonSerializeArray($this->getTaxLines()),
-			'TaxSummary' =>  $this->getTaxSummary(),
+			'TaxSummary' =>  $this->jsonSerializeArray($this->getTaxSummary()),
 			'TaxAddresses' =>  $this->getTaxAddresses(),
 			'ResultCode'=> $this->getResultCode(),
 			'Messages' => $this->jsonSerializeArray($this->getMessages()),
