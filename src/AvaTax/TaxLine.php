@@ -84,8 +84,16 @@ class TaxLine implements JsonSerializable
 		return $lineArray;
 	}
 	public function jsonSerialize(){
+
+        $taxDetails = array_map(
+            function ($detail) {
+                return $detail->jsonSerialize();
+            },
+            $this->getTaxDetails()
+        );
+
 		return array(
-			'TaxDetails' => $this->getTaxDetails(),
+			'TaxDetails' => $taxDetails,
 			'LineNo' => $this->getLineNo(),
 			'TaxCode' => $this->getTaxCode(),
 			'Taxability' => $this->getTaxability(),
