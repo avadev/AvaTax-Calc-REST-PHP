@@ -15,9 +15,9 @@
 
 namespace AvaTax;
 
-class GetTaxResult implements JsonSerializable// extends BaseResult
+class GetTaxResult extends AvaResult implements JsonSerializable
 {
-	private $DocCode;	//string  
+	private $DocCode;	//string
 	private $DocDate;			//date  		 	
 	private $Timestamp;		//dateTime  	
 	private $TotalAmount;		//decimal  
@@ -31,8 +31,7 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 	private $TaxSummary;		//ArrayOfTaxDetail	
 	private $TaxAddresses;		//ArrayOfAddress
 	
-	public function __construct( $resultCode, $messages, $docCode, $docDate, $timestamp, $totalAmount, $totalDiscount, $totalExemption, $totalTaxable, $totalTax, $totalTaxCalculated, 
-			$taxDate, $taxLines, $taxSummary, $taxAddresses)
+	public function __construct($resultCode, $messages, $docCode, $docDate, $timestamp, $totalAmount, $totalDiscount, $totalExemption, $totalTaxable, $totalTax, $totalTaxCalculated, $taxDate, $taxLines, $taxSummary, $taxAddresses)
 	{
 		$this->ResultCode = $resultCode;
 		$this->Messages = $messages;
@@ -52,10 +51,16 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 	
 	}
 
-    //Helper function to decode result objects from Json responses to specific objects.	
+    /**
+     * Helper function to decode result objects from Json responses to specific objects.
+     *
+     * @param $jsonString
+     * @return GetTaxResult
+     */
 	public static function parseResult($jsonString)
 	{
-		$object = json_decode($jsonString);
+		$object = self::jsonDecode($jsonString);
+
 		$taxlines = array();
 		$taxsummary = array();
 		$taxaddresses = array();
@@ -72,32 +77,67 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 		$totaltaxcalculated= null;
 		$taxdate= null;
 
-		if( property_exists($object,"ResultCode")) $resultcode = $object->ResultCode; 		
-		if( property_exists($object,"DocCode")) $doccode = $object->DocCode; 
-		if( property_exists($object,"DocDate")) $docdate = $object->DocDate;			 				
-		if( property_exists($object,"Timestamp")) $timestamp = $object->Timestamp;			
-		if( property_exists($object,"TotalAmount")) $totalamount = $object->TotalAmount;		
-		if( property_exists($object,"TotalDiscount")) $totaldiscount = $object->TotalDiscount;	
-		if( property_exists($object,"TotalExemption")) $totalexemption = $object->TotalExemption;	
-		if( property_exists($object,"TotalTaxable")) $totaltaxable = $object->TotalTaxable;	 
-		if( property_exists($object,"TotalTax")) $totaltax = $object->TotalTax;		  	
-		if( property_exists($object,"TotalTaxCalculated")) $totaltaxcalculated = $object->TotalTaxCalculated;		 
-		if( property_exists($object,"TaxDate")) $taxdate = $object->TaxDate;		
+		if( property_exists($object,"ResultCode")) {
+		    $resultcode = $object->ResultCode;
+        }
 
+		if( property_exists($object,"DocCode")) {
+		    $doccode = $object->DocCode;
+        }
+
+		if( property_exists($object,"DocDate")) {
+		    $docdate = $object->DocDate;
+        }
+
+		if( property_exists($object,"Timestamp")) {
+		    $timestamp = $object->Timestamp;
+        }
+
+		if( property_exists($object,"TotalAmount")) {
+		    $totalamount = $object->TotalAmount;
+        }
+
+		if( property_exists($object,"TotalDiscount")) {
+            $totaldiscount = $object->TotalDiscount;
+        }
+
+		if( property_exists($object,"TotalExemption")) {
+            $totalexemption = $object->TotalExemption;
+        }
+
+		if( property_exists($object,"TotalTaxable")) {
+		    $totaltaxable = $object->TotalTaxable;
+        }
+
+		if( property_exists($object,"TotalTax")) {
+		    $totaltax = $object->TotalTax;
+        }
+
+		if( property_exists($object,"TotalTaxCalculated")) {
+		    $totaltaxcalculated = $object->TotalTaxCalculated;
+        }
+
+		if( property_exists($object,"TaxDate")) {
+		    $taxdate = $object->TaxDate;
+        }
+
+		if(property_exists($object, "TaxLines")) {
+		    $taxlines = TaxLine::parseTaxLines("{\"TaxLines\": ".json_encode($object->TaxLines)."}");
+        }
+
+		if(property_exists($object, "TaxSummary")) {
+		    $taxsummary = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxSummary)."}");
+        }
+
+		if(property_exists($object, "TaxAddresses")) {
+		    $taxaddresses = Address::parseAddress("{\"TaxAddresses\": ".json_encode($object->TaxAddresses)."}");
+        }
+
+		if(property_exists($object, "Messages")) {
+		    $messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
+        }
 		
-		if(property_exists($object, "TaxLines"))
-			$taxlines = TaxLine::parseTaxLines("{\"TaxLines\": ".json_encode($object->TaxLines)."}");
-		if(property_exists($object, "TaxSummary"))
-			$taxsummary = TaxDetail::parseTaxDetails("{\"TaxDetails\": ".json_encode($object->TaxSummary)."}");
-		if(property_exists($object, "TaxAddresses"))
-			$taxaddresses = Address::parseAddress("{\"TaxAddresses\": ".json_encode($object->TaxAddresses)."}");	
-		if(property_exists($object, "Messages"))
-			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
-		
-		return new self( $resultcode , $messages, $doccode, $docdate, 
-		$timestamp, $totalamount, $totaldiscount,
-		$totalexemption, $totaltaxable, $totaltax, $totaltaxcalculated,
-		$taxdate, $taxlines, $taxsummary, $taxaddresses );	
+		return new self($resultcode , $messages, $doccode, $docdate, $timestamp, $totalamount, $totaldiscount, $totalexemption, $totaltaxable, $totaltax, $totaltaxcalculated, $taxdate, $taxlines, $taxsummary, $taxaddresses);
 	}
 
     /**
@@ -165,9 +205,13 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
  	public function setTaxLines($value) {  $this->TaxLines= $value; }	
 	public function setTaxSummary($value) {  $this->TaxSummary= $value; }		
 	public function setTaxAddresses($value) {  $this->TaxAddresses= $value; }
-	
 
-	//Allows for direct reference to and lookup of lines by line number.
+    /**
+     * Allows for direct reference to and lookup of lines by line number.
+     *
+     * @param $lineNo
+     * @return mixed
+     */
 	public function getTaxLine($lineNo)
 	{
 		if($this->getTaxLines() != null)
@@ -178,39 +222,9 @@ class GetTaxResult implements JsonSerializable// extends BaseResult
 				{
 					return $taxLine;
 				}
-				
 			}
 		}
 	}
-			
-	
-			
-	/////////////////////////////////////////////PHP bug requires this copy from BaseResult ///////////
-	/**
-	* @var string must be one of the values defined in {@link SeverityLevel}.
-	*/
-    private $ResultCode = 'Success';
-	/**
-	* @var array of Message.
-	*/
-    private $Messages = array();
-
-	/**
-	* Accessor
-	* @return string
-	*/
-    public function getResultCode() { return $this->ResultCode; }
-	/**
-	* Accessor
-	* @return array
-	*/
-    public function getMessages() { return $this->Messages; }
-    
-    
-
-
-
-
 }
 
 ?>

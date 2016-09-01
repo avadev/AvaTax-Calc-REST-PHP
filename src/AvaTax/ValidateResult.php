@@ -31,15 +31,13 @@
 
 namespace AvaTax;
 
-class ValidateResult extends BaseResult implements JsonSerializable
+class ValidateResult extends AvaResult implements JsonSerializable
 {
     /**
      * Array of matching {@link ValidAddress}'s.
-     * @var array
+     * @var array|ValidAddress[]
      */
     private $ValidAddress;
-    private $ResultCode = 'Success';
-    private $Messages = array();
 
     public function __construct($resultCode , $validaddress , $messages)
     {
@@ -48,21 +46,22 @@ class ValidateResult extends BaseResult implements JsonSerializable
         $this->Messages = $messages;
     }
 
-
-    //Helper function to decode result objects from Json responses to specific objects.
+    /**
+     * Helper function to decode result objects from Json responses to specific objects.
+     *
+     * @param $jsonString
+     * @return ValidateResult
+     * @throws AvaException
+     */
     public static function parseResult($jsonString)
     {
-        $object = json_decode($jsonString);
-
-        if(json_last_error() !== JSON_ERROR_NONE) {
-            throw new AvaException("ValidateResult failed to parse JSON", AvaException::INVALID_API_RESPONSE);
-        }
+        $object = self::jsonDecode($jsonString);
 
         $validaddress = new ValidAddress();
         $messages = array();
         $resultcode = null;
 
-        if( property_exists($object,"ResultCode")) {
+        if( property_exists($object, "ResultCode")) {
             $resultcode = $object->ResultCode;
         }
 
@@ -76,6 +75,7 @@ class ValidateResult extends BaseResult implements JsonSerializable
 
         return new self( $resultcode , $validaddress , $messages );
     }
+
     public function jsonSerialize(){
         return array(
             'ValidAddress' => $this->getValidAddress(),
@@ -85,9 +85,6 @@ class ValidateResult extends BaseResult implements JsonSerializable
     }
 
     public function getValidAddress() { return $this->ValidAddress; }
-    public function getResultCode() { return $this->ResultCode; }
-    public function getMessages() { return $this->Messages; }
-
 }
 
 ?>

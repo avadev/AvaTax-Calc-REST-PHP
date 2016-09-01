@@ -14,15 +14,10 @@ namespace AvaTax;
  * 
  */
 
-class CancelTaxResult implements JsonSerializable
+class CancelTaxResult extends AvaResult implements JsonSerializable
 {
-
-
-	private $DocId; //Internal Avalara reference to document - may not be returned for some accounts
-	private $TransactionId; //Internal Avalara reference to server transaction - may not be returned for some accounts
-	private $ResultCode = 'Success'; //string, must be one of the values defined in {@link SeverityLevel}.
-	private $Messages = array(); //array of Message.
-
+    /** @var string Internal Avalara reference to document - may not be returned for some accounts */
+	private $DocId;
 
 	public function __construct($docId, $transactionId, $resultCode, $messages)
 	{
@@ -32,22 +27,42 @@ class CancelTaxResult implements JsonSerializable
 		$this->Messages = $messages;
 	}
 
-	//Helper function to decode result objects from Json responses to specific objects.
-	public function parseResult($jsonString)
+    /**
+     * Helper function to decode result objects from Json responses to specific objects.
+     *
+     * @param $jsonString
+     * @return CancelTaxResult
+     */
+	public static function parseResult($jsonString)
 	{
-		$object = json_decode($jsonString);
-		if(property_exists($object,"CancelTaxResult")) $object = $object->CancelTaxResult;
-		$messages = array();
-		$docid= null;
-		$transactionid= null;
-		$resultcode= null;
-		if(property_exists($object, "Messages"))
-			$messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
+        $object = self::jsonDecode($jsonString);
 
-		if(property_exists($object, "DocId")) $docid = $object->DocId;
-		if(property_exists($object, "TransactionId"))	$transactionid = $object->TransactionId;
-		if(property_exists($object, "ResultCode")) $resultcode = $object->ResultCode;
-		return new self($docid, $transactionid, $resultcode , $messages );
+		if(property_exists($object,"CancelTaxResult")) {
+		    $object = $object->CancelTaxResult;
+        }
+
+		$messages = array();
+		$docid = null;
+		$transactionid = null;
+		$resultcode = null;
+
+		if(property_exists($object, "Messages")) {
+		    $messages = Message::parseMessages("{\"Messages\": ".json_encode($object->Messages)."}");
+        }
+
+		if(property_exists($object, "DocId")) {
+		    $docid = $object->DocId;
+        }
+
+		if(property_exists($object, "TransactionId")) {
+		    $transactionid = $object->TransactionId;
+        }
+
+		if(property_exists($object, "ResultCode")) {
+		    $resultcode = $object->ResultCode;
+        }
+
+		return new self($docid, $transactionid, $resultcode, $messages);
 	}
 
 	public function jsonSerialize(){
@@ -60,12 +75,6 @@ class CancelTaxResult implements JsonSerializable
 	}
 
 	public function getDocId() { return $this->DocId; }
-	public function getTransactionId() { return $this->TransactionId; }
-	public function getResultCode() { return $this->ResultCode; }
-	public function getMessages() { return $this->Messages; }
-
-
-
 }
 
 ?>
