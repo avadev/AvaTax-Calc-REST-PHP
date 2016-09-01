@@ -92,10 +92,10 @@ class TaxServiceRest
 
 		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
         // *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
-		
+		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
         //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
+		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above
 		//    that tells curl to NOT use SSL.
 		//$ca = "C:/curl/curl-ca-bundle.crt";
 		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
@@ -114,11 +114,19 @@ class TaxServiceRest
 	//Estimates a composite tax based on latitude/longitude and total sale amount.
 	public function estimateTax(&$estimateTaxRequest)
 	{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
+		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL))) {
+			throw new AvaException("A valid service URL is required.", AvaException::MISSING_INFO);
+		}
 
-		$url =  $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
+		if(empty($this->config['account'])){
+			throw new AvaException("Account number or username is required.", AvaException::MISSING_INFO);
+		}
+
+		if(empty($this->config['license'])){
+			throw new AvaException("License key or password is required.", AvaException::MISSING_INFO);
+		}
+
+		$url = $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
@@ -137,8 +145,16 @@ class TaxServiceRest
 
 		$curl_response = curl_exec($curl);
 
+		if($error_number = curl_errno($curl)) {
+			$error_msg = curl_strerror($error_number);
+			throw new AvaException("AddressServiceRest cURL error ({$error_number}): {$error_msg}", AvaException::CURL_ERROR);
+		}
+
+		if(!$curl_response) {
+			throw new AvaException('AddressServiceRest received empty result from API', AvaException::INVALID_API_RESPONSE);
+		}
+
 		return EstimateTaxResult::parseResult($curl_response);
-		
 	}
 	
 	//There is no explicit ping function in the REST API, so here's an imitation.

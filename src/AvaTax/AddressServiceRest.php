@@ -48,9 +48,17 @@ class AddressServiceRest
 		//Validates/normalizes a single provided address. Will either return a single, non-ambiguous validated address match or an error.
 	public function validate($validateRequest)
 	{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
+		if(!(filter_var($this->config['url'], FILTER_VALIDATE_URL))) {
+			throw new AvaException("A valid service URL is required.", AvaException::MISSING_INFO);
+		}
+
+		if(empty($this->config['account'])){
+			throw new AvaException("Account number or username is required.", AvaException::MISSING_INFO);
+		}
+
+		if(empty($this->config['license'])){
+			throw new AvaException("License key or password is required.", AvaException::MISSING_INFO);
+		}
 
 		$url =  $this->config['url'].'/1.0/address/validate?'. http_build_query($validateRequest->getAddress());
 		$curl = curl_init();
@@ -61,6 +69,15 @@ class AddressServiceRest
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 		$result = curl_exec($curl);
+
+		if($error_number = curl_errno($curl)) {
+			$error_msg = curl_strerror($error_number);
+			throw new AvaException("AddressServiceRest cURL error ({$error_number}): {$error_msg}", AvaException::CURL_ERROR);
+		}
+
+		if(!$result) {
+			throw new AvaException('AddressServiceRest received empty result from API', AvaException::INVALID_API_RESPONSE);
+		}
 
 		return ValidateResult::parseResult($result);
 
