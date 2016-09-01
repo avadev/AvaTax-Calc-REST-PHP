@@ -4,7 +4,13 @@ namespace AvaTax;
 
 class AvaException extends \Exception
 {
-    const INVALID_API_RESPONSE = 'invalid_response';
-    const CURL_ERROR = 'curl_error';
-    const MISSING_INFO = 'missing_info';
+    const UNKNOWN = 0;
+    const INVALID_API_RESPONSE = 1;
+    const CURL_ERROR = 2;
+    const MISSING_INFO = 3;
+
+    public function __construct($message = "", $code = self::UNKNOWN, \Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }

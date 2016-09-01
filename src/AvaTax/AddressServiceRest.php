@@ -2,9 +2,9 @@
 /**
  * AddressServiceRest.class.php
  */
- 
+
 /**
- * Interface for the Avalara Address Web Service. 
+ * Interface for the Avalara Address Web Service.
  *
  * AddressServiceRest reads its configuration values from parameters in the constructor
  *
@@ -17,12 +17,12 @@
  * @author    Avalara
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Address
- * 
+ *
  */
 
 namespace AvaTax;
 
-class AddressServiceRest 
+class AddressServiceRest
 {
 	static protected $classmap = array(
 		'Validate' => 'Validate',
@@ -45,7 +45,7 @@ class AddressServiceRest
 	}
 
 
-		//Validates/normalizes a single provided address. Will either return a single, non-ambiguous validated address match or an error.
+	//Validates/normalizes a single provided address. Will either return a single, non-ambiguous validated address match or an error.
 	public function validate($validateRequest)
 	{
 		if(!(filter_var($this->config['url'], FILTER_VALIDATE_URL))) {
