@@ -167,3 +167,8 @@ Samples/composer.json
 Samples/vendor/
 Samples/composer.lock
 vendor/
+
+############
+## PHPStorm
+############
+.idea
