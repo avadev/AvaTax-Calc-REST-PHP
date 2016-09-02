@@ -40,7 +40,7 @@ class GetTaxRequest
 
 	public function __construct()
 	{
-		$date = \DateTime::createFromFormat('U.u', microtime(true));
+		$date = \DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
 		$this->DocDate = $date->format('Y-m-d');
 		$this->Commit=false;
 		$this->DocType=DocumentType::$SalesOrder;
