@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 include 'configuration.php';
 
 // Header Level Elements
@@ -7,8 +7,9 @@ include 'configuration.php';
 $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
+$SSL = $configuration['SSL'];
 
-$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
+$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey, $SSL);
 	
 $geoTaxResult = $taxSvc->ping(""); 
 echo 'PingTest Result: ' . $geoTaxResult->getResultCode()."\n";
