@@ -40,7 +40,7 @@ for your system, uncomment ONE of the following two options in that file:
         }
     ],
     "require": {
-        "avalara/avatax": "*"
+        "avalara/avatax-rest-api": "*"
     }
 ```
 to your composer.json file and run `php composer.phar update` from your command line.
