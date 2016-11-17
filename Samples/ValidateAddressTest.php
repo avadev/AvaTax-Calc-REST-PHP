@@ -7,8 +7,9 @@ include 'configuration.php';
 $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
+$SSL = $configuration['SSL'];
 	
-$addressSvc = new AvaTax\AddressServiceRest($serviceURL, $accountNumber, $licenseKey);
+$addressSvc = new AvaTax\AddressServiceRest($serviceURL, $accountNumber, $licenseKey, $SSL);
 $address = new AvaTax\Address();
 
 // Required Request Parameters
