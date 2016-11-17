@@ -1,5 +1,5 @@
 {
-    "name": "avalara/avatax",
+    "name": "avalara/avatax-rest-api",
     "version": "14.4.4",
     "description": "A set of classes to assist with integration to the Avalara AvaTax REST API.",
     "require": {
