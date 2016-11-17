@@ -33,7 +33,6 @@ namespace AvaTax;
  
 class Address
 {
-
 	public $AddressCode;
 	public $Line1;
 	public $Line2;

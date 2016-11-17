@@ -28,14 +28,14 @@ class AvaFunctions
 
 	public static function getDefaultDate()
 	{
-		$dateTime=new DateTime();
+		$dateTime = new \DateTime();
 		$dateTime->setDate(1900,01,01);
 		return $dateTime->format("Y-m-d");
 	}
 
 	public static function getCurrentDate()
 	{
-		$dateTime=new DateTime();
+		$dateTime = new \DateTime();
 		return $dateTime->format("Y-m-d");
 	} 
 }

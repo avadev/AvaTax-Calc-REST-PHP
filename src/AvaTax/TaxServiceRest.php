@@ -16,12 +16,12 @@
  * @author    Avalara
  * @copyright � 2004 - 2011 Avalara, Inc.  All rights reserved.
  * @package   Tax
- * 
+ *
  */
 
 namespace AvaTax;
 
-class TaxServiceRest
+class TaxServiceRest extends RestService
 {
 	static protected $classmap = array(
 		'Address' => 'Address',
@@ -39,114 +39,52 @@ class TaxServiceRest
 		'BaseResult'=>'BaseResult',
 		'TaxOverride'=>'TaxOverride'
 	);
-	protected $config = array();
 
-	public function __construct($url, $account, $license)
+	/**
+	 * Voids a document that has already been recorded on the Admin Console.
+	 *
+	 * @param $cancelTaxRequest
+	 * @return CancelTaxResult
+	 */
+	public function cancelTax(CancelTaxRequest &$cancelTaxRequest)
 	{
-		$this->config = array(
-		'url' => $url,
-		'account' => $account,
-		'license' => $license);
+		return CancelTaxResult::parseResult($this->processRequest("/1.0/tax/cancel", $cancelTaxRequest));
 	}
 
-	//Voids a document that has already been recorded on the Admin Console.
-	public function cancelTax(&$cancelTaxRequest)
+	/**
+	 * Calculates tax on a document and/or records that document to the Admin Console.
+	 *
+	 * @param $getTaxRequest
+	 * @return GetTaxResult
+	 * @throws Exception
+	 * @throws \Exception
+	 */
+	public function getTax(GetTaxRequest &$getTaxRequest)
 	{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
-		
-		$url = $this->config['url']."/1.0/tax/cancel";
-		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
-		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-        // *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
-		
-        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
-		//    that tells curl to NOT use SSL.
-		//$ca = "C:/curl/curl-ca-bundle.crt";
-		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
-
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($cancelTaxRequest));
-		$curl_response = curl_exec($curl);
-		curl_close($curl);
-		return CancelTaxResult::parseResult($curl_response);
+		return GetTaxResult::parseResult($this->processRequest("/1.0/tax/get", $getTaxRequest));
 	}
 
-	//Calculates tax on a document and/or records that document to the Admin Console.
-	public function getTax(&$getTaxRequest)
-		{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
-
-		$url = $this->config['url']."/1.0/tax/get";
-		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
-
-		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-        // *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
-		
-        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
-		//    that tells curl to NOT use SSL.
-		//$ca = "C:/curl/curl-ca-bundle.crt";
-		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
-
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($getTaxRequest));
-		$curl_response = curl_exec($curl);
-
-		curl_close($curl);
-
-		return GetTaxResult::parseResult($curl_response);
-
-		}
-
-	//Estimates a composite tax based on latitude/longitude and total sale amount.
-	public function estimateTax(&$estimateTaxRequest)
+	/**
+	 * Estimates a composite tax based on latitude/longitude and total sale amount.
+	 *
+	 * @param $estimateTaxRequest EstimateTaxRequest
+	 * @return EstimateTaxResult
+	 * @throws AvaException
+	 */
+	public function estimateTax(EstimateTaxRequest &$estimateTaxRequest)
 	{
-		if(!(filter_var($this->config['url'],FILTER_VALIDATE_URL)))			throw new \Exception("A valid service URL is required.");
-		if(empty($this->config['account']))		throw new Exception("Account number or username is required.");
-		if(empty($this->config['license']))		throw new Exception("License key or password is required.");
-
-		$url =  $this->config['url'].'/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount();
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-		curl_setopt($curl, CURLOPT_USERPWD, $this->config['account'].":".$this->config['license']);
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-		//Some Windows users have had trouble with our SSL Certificates. Uncomment the following line to NOT use SSL.
-        // *This is not recommended, see below for better alternative*
-		//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 		
-		
-        //Other Windows users may prefer to download the certificate from our site (detail here: http://developer.avalara.com/api-docs/designing-your-integration/errors-and-outages/ssl-certificates) and manually set the cert path.
-		//    To set the path manually, uncomment the following two lines and ensure you are telling curl where it can find the root certificate. If you choose to manually set the path, make sure you have reenabled cURL by commenting out the line above 
-		//    that tells curl to NOT use SSL.
-		//$ca = "C:/curl/curl-ca-bundle.crt";
-		//curl_setopt($curl, CURLOPT_CAINFO, $ca);
-
-		$curl_response = curl_exec($curl);
-
-		return EstimateTaxResult::parseResult($curl_response);
-		
+		return EstimateTaxResult::parseResult($this->processRequest('/1.0/tax/'. $estimateTaxRequest->getLatitude().",".$estimateTaxRequest->getLongitude().'/get?saleamount='.$estimateTaxRequest->getSaleAmount()));
 	}
-	
-	//There is no explicit ping function in the REST API, so here's an imitation.
-	public function ping($msg = "")
+
+	/**
+	 * There is no explicit ping function in the REST API, so here's an imitation.
+	 *
+	 * @return EstimateTaxResult
+	 */
+	public function ping()
 	{
 		$request = new EstimateTaxRequest("47.627935","-122.51702","10");
 		return $this->estimateTax($request);
-		
 	}
 }
 
