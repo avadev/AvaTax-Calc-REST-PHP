@@ -7,19 +7,20 @@ include 'configuration.php';
 $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
+$SSL = $configuration['SSL'];
 	
-$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
+$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey, $SSL);
 $getTaxRequest = new AvaTax\GetTaxRequest();
 
 // Document Level Elements
 // Required Request Parameters
 $getTaxRequest->setCustomerCode("ABC4335");
-$getTaxRequest->setDocDate("2014-01-01");
+$getTaxRequest->setDocDate("2016-01-01");
 
 // Best Practice Request Parameters
 $getTaxRequest->setCompanyCode("APITrialCompany");
 $getTaxRequest->setClient("AvaTaxSample");
-$getTaxRequest->setDocCode("INV001");
+$getTaxRequest->setDocCode("INV005");
 $getTaxRequest->setDetailLevel(AvaTax\DetailLevel::$Tax);
 $getTaxRequest->setCommit(FALSE);
 $getTaxRequest->setDocType(AvaTax\DocumentType::$SalesInvoice);
@@ -136,7 +137,8 @@ $getTaxRequest->setLines($lines);
 $getTaxResult = $taxSvc->getTax($getTaxRequest);
 
 //Print Results
-echo 'GetTaxTest Result: ' . $getTaxResult->getResultCode() . "\n";
+//echo '<br><pre>GetTaxTest Result: ';
+//print_r($getTaxResult);
 if($getTaxResult->getResultCode() != AvaTax\SeverityLevel::$Success)	// call failed
 {	
 	foreach($getTaxResult->getMessages() as $message)
@@ -146,13 +148,13 @@ if($getTaxResult->getResultCode() != AvaTax\SeverityLevel::$Success)	// call fai
 }
 else
 {
-	echo "Document Code: " . $getTaxResult->getDocCode() . " Total Tax: " . $getTaxResult->getTotalTax() . "\n";
+	echo "<br>Document Code: " . $getTaxResult->getDocCode() . " Total Tax: " . $getTaxResult->getTotalTax() . "\n";
 	foreach($getTaxResult->getTaxLines() as $taxLine)
 	{
-		echo "    " . "Line Number: " . $taxLine->getLineNo() . " Line Tax: " . $taxLine->getTax() . "\n";
+		echo "<br>    " . "Line Number: " . $taxLine->getLineNo() . " Line Tax: " . $taxLine->getTax() . "\n";
 		foreach($taxLine->getTaxDetails() as $taxDetail)
 		{
-			echo "        " . "Jurisdiction: " . $taxDetail->getJurisName() . " Tax: " . $taxDetail->getTax() . "\n";
+			echo "<br>        " . "Jurisdiction: " . $taxDetail->getJurisName() . " Tax: " . $taxDetail->getTax() . "\n";
 		}
 	}
 }	
