@@ -7,8 +7,9 @@ include 'configuration.php';
 $serviceURL = $configuration['serviceURL'];
 $accountNumber = $configuration['accountNumber'];
 $licenseKey = $configuration['licenseKey'];
+$SSL = $configuration['SSL'];
 	
-$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey);
+$taxSvc = new AvaTax\TaxServiceRest($serviceURL, $accountNumber, $licenseKey, $SSL);
 
 // Required Request Parameters
 $latitude = 47.627935;
