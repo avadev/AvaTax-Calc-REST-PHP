@@ -79,7 +79,7 @@ class ValidAddress
 			$object->FipsCode,
 			isset($object->CarrierRoute) ? $object->CarrierRoute : null,
 			isset($object->PostNet) ? $object->PostNet : null,
-			$object->AddressType);
+			isset($object->AddressType) ? $object->AddressType : null);
 	}
 
 
