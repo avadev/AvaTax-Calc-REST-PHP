@@ -78,7 +78,7 @@ class ValidAddress
 			isset($object->County) ? $object->County : null,
 			$object->FipsCode,
 			isset($object->CarrierRoute) ? $object->CarrierRoute : null,
-			$object->PostNet,
+			isset($object->PostNet) ? $object->PostNet : null,
 			$object->AddressType);
 	}
 
